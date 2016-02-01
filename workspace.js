@@ -855,7 +855,6 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 }); //End Serial Port Console Log Window
 
 
-            //put  XYZ widget here.  It has a missing paren/ brace/ bracket somewhere that breaks everything here
                 // XYZ
     // http://jsfiddle.net/chilipeppr/gh45j/
     chilipeppr.load(
