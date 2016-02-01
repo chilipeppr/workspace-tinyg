@@ -753,7 +753,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
             //do I need billboard?  I think it's already taken care of.
             
-            /*
+            
             // 3D Viewer
             // http://jsfiddle.net/chilipeppr/y3HRF
             chilipeppr.load(
@@ -799,7 +799,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                             });
                         });
 
-                }); //End 3D Viewer */
+                }); //End 3D Viewer
 
             // Gcode List v3
             // OLD v2 http://jsfiddle.net/chilipeppr/F2Qn3/
