@@ -856,6 +856,25 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
 
             //put  XYZ widget here.  It has a missing paren/ brace/ bracket somewhere that breaks everything here
+                // XYZ
+    // http://jsfiddle.net/chilipeppr/gh45j/
+    chilipeppr.load(
+        "com-chilipeppr-xyz",
+        // Lauer's new widget 8/16/15
+        "http://fiddle.jshell.net/chilipeppr/5zx269pa/show/light/", 
+        // Temporary widget from Danal
+        //"http://fiddle.jshell.net/Danal/vktco1y6/show/light/", 
+        // Lauer's original core widget
+        //"http://fiddle.jshell.net/chilipeppr/gh45j/show/light/",
+
+    function () {
+        cprequire(
+        ["inline:com-chilipeppr-widget-xyz"],
+
+        function (xyz) {
+            xyz.init();
+        });
+    }); //End XYZ
             
                         // TinyG
     // http://jsfiddle.net/chilipeppr/XxEBZ/
