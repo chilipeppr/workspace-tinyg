@@ -1178,7 +1178,8 @@ var pushToGithubSync = function() {
   stdout += "> git add *\n";
   stdout += '> git commit -m "Made some changes to ChiliPeppr myWorkspace using Cloud9"\n';
   stdout += "> git push\n";
-  stdout += proc.execSync('git add *; git commit -m "Made some changes to ChiliPeppr myWorkspace using Cloud9"; git push;', { encoding: 'utf8' });
+  stdout += "> git push origin master:gh-pages\n";
+  stdout += proc.execSync('git add *; git commit -m "Made some changes to ChiliPeppr myWorkspace using Cloud9"; git push; git push origin master:gh-pages;', { encoding: 'utf8' });
   console.log("Pushed to github sync. Stdout:", stdout);
   
   return stdout;
@@ -1194,6 +1195,9 @@ var pushToGithubAsync = function() {
       // command output is in stdout
       console.log("stdout:", stdout2, "stderr:", stderr2);
       exec('git push', function(error3, stdout3, stderr3) {
+        exec('git push origin master:gh-pages', function(error4, stdout4, stderr4) {
+          
+        });
         // command output is in stdout
         console.log("stdout:", stdout3, "stderr:", stderr3);
       });
