@@ -1195,7 +1195,7 @@ var pushToGithubAsync = function() {
       // command output is in stdout
       console.log("stdout:", stdout2, "stderr:", stderr2);
       exec('git push', function(error3, stdout3, stderr3) {
-        exec('git push origin master:gh-pages', function(error3, stdout3, stderr3) {
+        exec('git push origin master:gh-pages', function(error4, stdout4, stderr4) {
           
         });
         // command output is in stdout
