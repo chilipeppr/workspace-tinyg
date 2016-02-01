@@ -705,20 +705,20 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             touchPlateObj.init();
             //End Touch Plate
 
-            // Arduino / Atmel Firmware Programmer
-            // FIDDLE http://jsfiddle.net/chilipeppr/qcduvhkh/11/
-
-            chilipeppr.load(
-                "com-chilipeppr-ws-programmer",
-                "http://fiddle.jshell.net/chilipeppr/qcduvhkh/show/light/",
-                require(["inline:com-chilipeppr-widget-programmer"], function(programmer) {
-                    programmer.init();
-                    // setup toggle button
-                    var btn = $('#com-chilipeppr-ws-gcode-menu .programmer-button');
-                    var div = $('#com-chilipeppr-ws-programmer');
-                    btn.click(programmer.show.bind(programmer));
-                })
-            ); //End Arduino / Atmel Firmware Programmer
+        // Arduino / Atmel Firmware Programmer
+    // FIDDLE http://jsfiddle.net/chilipeppr/qcduvhkh/11/
+    
+    chilipeppr.load(
+        "com-chilipeppr-ws-programmer",
+        "http://fiddle.jshell.net/chilipeppr/qcduvhkh/show/light/",
+        require(["inline:com-chilipeppr-widget-programmer"], function (programmer) {
+            programmer.init();
+            // setup toggle button
+            var btn = $('#com-chilipeppr-ws-gcode-menu .programmer-button');
+            var div = $('#com-chilipeppr-ws-programmer');
+            btn.click(programmer.show.bind(programmer));
+        })  
+    );  //End Arduino / Atmel Firmware Programmer
 
             // Element / Drag Drop
             // Load the dragdrop element into workspace toolbar
