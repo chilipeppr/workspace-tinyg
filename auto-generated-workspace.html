@@ -1043,6 +1043,48 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
         });
     }); //End TinyG
 
+        // WebRTC Client com-chilipeppr-webrtcclient
+    /*
+    chilipeppr.load(
+        "com-chilipeppr-webrtcclient",
+        "http://fiddle.jshell.net/chilipeppr/qWj4f/show/light/",
+
+    function () {
+        cprequire(
+        ["inline:com-chilipeppr-widget-webrtc-client"],
+
+        function (webrtcclient) {
+            webrtcclient.init();
+        });
+    }); //End WebRTC Client
+*/
+
+
+    // Serial Port Selector
+    // http://jsfiddle.net/chilipeppr/4RgrS/
+    // NEW VERSION for SPJS v1.7 http://jsfiddle.net/chilipeppr/vetj5fvx/
+    chilipeppr.load("com-chilipeppr-serialport-spselector",
+        "http://fiddle.jshell.net/chilipeppr/vetj5fvx/show/light/",
+
+    function () {
+        cprequire(
+        ["inline:com-chilipeppr-widget-serialport"],
+
+        function (sp) {
+            sp.setSingleSelectMode();
+            //sp.init("192.168.1.7");
+            // We have a new TinyG buffer built into the serial
+            // port server. This asks the serial port widget to
+            // request the tinyg buffer. Make sure you ARE connected
+            // to a tinyg cuz it looks for a {"qr":""} response to release
+            // the flow
+            sp.init(null, "tinyg", 115200);
+            //$('.com-chilipeppr-widget-serialport-console').removeClass("hidden");
+            //$('.com-chilipeppr-widget-serialport-consoleinput').removeClass("hidden");
+            //$('.com-chilipeppr-widget-serialport-status').removeClass("hidden");
+        });
+    }); //End Serial Port Selector
+
 
         },
         //end loadWidgets
