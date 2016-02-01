@@ -1,5 +1,5 @@
 /* global cpdefine chilipeppr cprequire */
-cprequire_test(["inline:com-chilipeppr-workspace-sample"], function(ws) {
+cprequire_test(["inline:com-chilipeppr-workspace-tinyg"], function(ws) {
 
     console.log("initting workspace");
 
@@ -27,24 +27,34 @@ cprequire_test(["inline:com-chilipeppr-workspace-sample"], function(ws) {
     ws.init();
     
     // Do some niceties for testing like margins on widget and title for browser
-    $('title').html("Sample Workspace");
+    $('title').html("Tinyg Workspace");
     $('body').css('padding', '10px');
 
 } /*end_test*/ );
 
 // This is the main definition of your widget. Give it a unique name.
-cpdefine("inline:com-chilipeppr-workspace-sample", ["chilipeppr_ready"], function() {
+cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function() {
     return {
         /**
          * The ID of the widget. You must define this and make it unique.
          */
-        id: "com-chilipeppr-workspace-sample", // Make the id the same as the cpdefine id
-        name: "Workspace / Sample", // The descriptive name of your widget.
-        desc: `A ChiliPeppr Workspace sample.`,
+        id: "com-chilipeppr-workspace-tinyg", // Make the id the same as the cpdefine id
+        name: "Workspace / TinyG", // The descriptive name of your widget.
+        desc: `This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG.`,
         url: "(auto fill by runme.js)", // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
         fiddleurl: "(auto fill by runme.js)", // The edit URL. This can be auto-filled by runme.js in Cloud9 if you'd like, or just define it on your own to help people know where they can edit/fork your widget
         githuburl: "(auto fill by runme.js)", // The backing github repo
         testurl: "(auto fill by runme.js)", // The standalone working widget so can view it working by itself
+        
+        foreignSubscribe: {
+            "/com-chilipeppr-elem-dragdrop/ondragover" : "The Chilipeppr drag drop element will publish on channel /com-chilipeppr-elem-dragdrop/ondropped when a file is dropped so we subscribe to it so we can load a Gcode file when the user drags it onto the browser. It also adds a hover class to the bound DOM elem so we can add a CSS to hilite on hover",
+            "/com-chilipeppr-elem-dragdrop/ondragleave" : "We need to know when the drag is over to remove the CSS hilites.",
+            "/com-chilipeppr-widget-gcode/resize" : "We watch if the Gcode viewer resizes so that we can reposition or resize other elements in the workspace. Specifically we ask the Serial Port Console to resize. We also redraw the 3D Viewer so it fills the whole screen."
+        },
+        
+        foreignPublish: {
+        },
+        
         /**
          * Contains reference to the Console widget object. Hang onto the reference
          * so we can resize it when the window resizes because we want it to manually
@@ -78,6 +88,8 @@ cpdefine("inline:com-chilipeppr-workspace-sample", ["chilipeppr_ready"], functio
             // just set widget min-height in CSS instead
             this.setupResize();
             setTimeout(function() { $(window).trigger('resize'); }, 100);
+            
+            this.loadWidgets();
 
         },
         /**
@@ -201,5 +213,74 @@ cpdefine("inline:com-chilipeppr-workspace-sample", ["chilipeppr_ready"], functio
                 }
             );
         },
+        
+        
+        loadWidgets: function (callback) {
+            // Zipwhip texting
+            // com-chilipeppr-ws-zipwhip
+            chilipeppr.load(
+                "#com-chilipeppr-ws-zipwhip",
+                "http://fiddle.jshell.net/chilipeppr/56X9G/show/light/",
+                function() {
+                    require(["inline:com-chilipeppr-elem-zipwhip"], function(zipwhip) {
+                        zipwhip.init();
+                        // setup toggle button
+                        var zwBtn = $('#com-chilipeppr-ws-gcode-menu .zipwhip-button');
+                        var zwDiv = $('#com-chilipeppr-ws-zipwhip');
+                        zwBtn.click(function() {
+                            if (zwDiv.hasClass("hidden")) {
+                                // unhide
+                                zwDiv.removeClass("hidden");
+                                zwBtn.addClass("active");
+                            }
+                            else {
+                                zwDiv.addClass("hidden");
+                                zwBtn.removeClass("active");
+                            }
+                            $(window).trigger('resize');
+                        });
+                    });
+                });  //End Zipwhip texting
+                
+                
+                // Auto-Leveller
+                // com-chilipeppr-ws-autolevel
+                chilipeppr.load(
+                    "#com-chilipeppr-ws-autolevel",
+                    "http://fiddle.jshell.net/chilipeppr/h3NaZ/show/light/",
+                    function() {
+                        require(["inline:com-chilipeppr-widget-autolevel"], function(autolevel) {
+                            autolevel.init();
+                            // setup toggle button
+                            var alBtn = $('#com-chilipeppr-ws-gcode-menu .autolevel-button');
+                            var alDiv = $('#com-chilipeppr-ws-autolevel');
+                            alBtn.click(function() {
+                                if (alDiv.hasClass("hidden")) {
+                                    // unhide
+                                    alDiv.removeClass("hidden");
+                                    alBtn.addClass("active");
+                                    autolevel.onDisplay();
+                                }
+                                else {
+                                    alDiv.addClass("hidden");
+                                    alBtn.removeClass("active");
+                                    autolevel.onUndisplay();
+                                }
+                                $(window).trigger('resize');
+
+                            });
+                        });
+                    });  //End Auto-Leveller
+                    
+                    
+                
+            
+            
+            
+        },
+        //end loadWidgets
+        
+        
+        
     }
 });
