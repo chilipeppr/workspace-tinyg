@@ -1020,9 +1020,28 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 }); //End Serial Port Console Log Window
 
 
-            //temp done till XYZ widget.  It has a missing paren/ brace/ bracket somewhere that breaks everything here
+            //put  XYZ widget here.  It has a missing paren/ brace/ bracket somewhere that breaks everything here
+            
+                        // TinyG
+    // http://jsfiddle.net/chilipeppr/XxEBZ/
+    // com-chilipeppr-tinyg
+    chilipeppr.load(
+        "com-chilipeppr-tinyg",
+        // Lauer's v2 (Jul 28th 2015) Fixed to {"sv":1}
+        "http://fiddle.jshell.net/chilipeppr/h458y7gt/show/light/",
+        // Danal's version
+        //"http://fiddle.jshell.net/Danal/6rq2wx3o/show/light/",
+        // Lauer's version
+        //"http://fiddle.jshell.net/chilipeppr/XxEBZ/show/light/",
 
+    function () {
+        cprequire(
+        ["inline:com-chilipeppr-widget-tinyg"],
 
+        function (tinyg) {
+            tinyg.init();
+        });
+    }); //End TinyG
 
 
         },
