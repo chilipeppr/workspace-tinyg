@@ -333,7 +333,8 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         });
                     });
                 }); //End JSCut
-
+                
+            /*    
             // Laser Solder
             // com-chilipeppr-ws-jscut
             chilipeppr.load(
@@ -363,6 +364,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         });
                     });
                 }); //End Laser Solder
+                */
 
             // Eagle BRD Import
             // com-chilipeppr-widget-eagle
