@@ -338,7 +338,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // com-chilipeppr-ws-jscut
             chilipeppr.load(
                 "#com-chilipeppr-ws-lasersolder",
-                "http://fiddle.jshell.net/chilipeppr/xuu785yz/show/light/",
+                "",
                 function() {
                     require(["inline:com-chilipeppr-widget-lasersolder"], function(ls) {
                         ls.init();
@@ -710,7 +710,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
     
     chilipeppr.load(
         "com-chilipeppr-ws-programmer",
-        "http://fiddle.jshell.net/chilipeppr/qcduvhkh/show/light/",
+        "https://raw.githubusercontent.com/chilipeppr/widget-programmer/master/auto-generated-widget.html",
         require(["inline:com-chilipeppr-widget-programmer"], function (programmer) {
             programmer.init();
             // setup toggle button
