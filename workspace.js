@@ -334,12 +334,12 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     });
                 }); //End JSCut
                 
-            /*    
+             
             // Laser Solder
             // com-chilipeppr-ws-jscut
             chilipeppr.load(
                 "#com-chilipeppr-ws-lasersolder",
-                "",
+                "http://raw.githubusercontent.com/raykholo/widget-lasersolder/master/auto-generated-widget.html",
                 function() {
                     require(["inline:com-chilipeppr-widget-lasersolder"], function(ls) {
                         ls.init();
@@ -364,7 +364,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         });
                     });
                 }); //End Laser Solder
-                */
+                
 
             // Eagle BRD Import
             // com-chilipeppr-widget-eagle
