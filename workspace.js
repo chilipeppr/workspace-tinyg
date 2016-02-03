@@ -136,7 +136,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
             chilipeppr.load(
                 "#com-chilipeppr-widget-serialport-instance",
-                "http://raw.githubusercontent.com/raykholo/widget-autolevel/master/auto-generated-widget.html",
+                "http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html",
                 function() {
                     console.log("mycallback got called after loading spjs module");
                     cprequire(["inline:com-chilipeppr-widget-serialport"], function(spjs) {
@@ -166,7 +166,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             var that = this;
             chilipeppr.load(
                 "#com-chilipeppr-widget-spconsole-instance",
-                "http://fiddle.jshell.net/chilipeppr/rczajbx0/show/light/",
+                "http://raw.githubusercontent.com/chilipeppr/widget-console/master/auto-generated-widget.html",
                 function() {
                     // Callback after widget loaded into #com-chilipeppr-widget-spconsole-instance
                     cprequire(
@@ -198,7 +198,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // Workspace Menu with Workspace Billboard
             var that = this;
             chilipeppr.load(
-                "http://fiddle.jshell.net/chilipeppr/zMbL9/show/light/",
+                "http://raw.githubusercontent.com/chilipeppr/widget-pubsubviewer/master/auto-generated-widget.html",
                 function() {
                     require(['inline:com-chilipeppr-elem-pubsubviewer'], function(pubsubviewer) {
 
@@ -223,7 +223,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // com-chilipeppr-ws-zipwhip
             chilipeppr.load(
                 "#com-chilipeppr-ws-zipwhip",
-                "http://fiddle.jshell.net/chilipeppr/56X9G/show/light/",
+                "http://raw.githubusercontent.com/chilipeppr/widget-zipwhip/master/auto-generated-widget.html",
                 function() {
                     require(["inline:com-chilipeppr-elem-zipwhip"], function(zipwhip) {
                         zipwhip.init();
@@ -250,7 +250,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // com-chilipeppr-ws-autolevel
             chilipeppr.load(
                 "#com-chilipeppr-ws-autolevel",
-                "http://fiddle.jshell.net/chilipeppr/h3NaZ/show/light/",
+                "http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html",
                 function() {
                     require(["inline:com-chilipeppr-widget-autolevel"], function(autolevel) {
                         autolevel.init();
@@ -311,7 +311,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // com-chilipeppr-ws-jscut
             chilipeppr.load(
                 "#com-chilipeppr-ws-jscut",
-                "http://fiddle.jshell.net/chilipeppr/7ZzSV/show/light/",
+                "http://raw.githubusercontent.com/chilipeppr/widget-jscut/master/auto-generated-widget.html",
                 function() {
                     require(["inline:org-jscut-gcode-widget"], function(jscut) {
                         jscut.init();
@@ -339,7 +339,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // com-chilipeppr-ws-jscut
             chilipeppr.load(
                 "#com-chilipeppr-ws-lasersolder",
-                "http://fiddle.jshell.net/chilipeppr/xuu785yz/show/light/",
+                "http://raw.githubusercontent.com/raykholo/widget-lasersolder/master/auto-generated-widget.html",
                 function() {
                     require(["inline:com-chilipeppr-widget-lasersolder"], function(ls) {
                         ls.init();
@@ -543,7 +543,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         var that = this;
                         chilipeppr.load(
                             "#com-chilipeppr-ws-gpio",
-                            "http://fiddle.jshell.net/benjamind/L3c7csaw/show/light/",
+                            "http://raw.githubusercontent.com/chilipeppr/widget-gpio/master/auto-generated-widget.html",
                             function() {
                                 require(["inline:net-delarre-widget-gpio"], function(gpio) {
                                     that.gpioInstance = gpio;
@@ -578,7 +578,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             var shuttlexpressObj = {
                 id: "shuttlexpress",
                 //url: "http://fiddle.jshell.net/chilipeppr/27v59xLg/show/light/",
-                url: "http://fiddle.jshell.net/lordmundi/btyfqk7w/show/light/",
+                url: "http://raw.githubusercontent.com/chilipeppr/widget-shuttlexpress/master/auto-generated-widget.html",
                 requireName: "inline:com-chilipeppr-widget-shuttlexpress",
                 btn: null,
                 div: null,
@@ -681,7 +681,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         var that = this;
                         chilipeppr.load(
                             "#com-chilipeppr-ws-touchplate",
-                            "http://fiddle.jshell.net/chilipeppr/skqyhd1m/show/light/",
+                            "http://raw.githubusercontent.com/chilipeppr/widget-touchplate/master/auto-generated-widget.html",
                             function() {
                                 require(["inline:com-chilipeppr-widget-touchplate"], function(touchPlate) {
                                     that.touchPlateInstance = touchPlate;
@@ -712,7 +712,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
     
     chilipeppr.load(
         "com-chilipeppr-ws-programmer",
-        "https://raw.githubusercontent.com/chilipeppr/widget-programmer/master/auto-generated-widget.html",
+        "http://raw.githubusercontent.com/chilipeppr/widget-programmer/master/auto-generated-widget.html",
         require(["inline:com-chilipeppr-widget-programmer"], function (programmer) {
             programmer.init();
             // setup toggle button
@@ -726,7 +726,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // Load the dragdrop element into workspace toolbar
             // http://jsfiddle.net/chilipeppr/Z9F6G/
             chilipeppr.load("#com-chilipeppr-ws-gcode-dragdrop",
-                "http://fiddle.jshell.net/chilipeppr/Z9F6G/show/light/",
+                "http://raw.githubusercontent.com/chilipeppr/elem-dragdrop/master/auto-generated-widget.html",
                 function() {
                     require(["inline:com-chilipeppr-elem-dragdrop"], function(dd) {
                         console.log("inside require of dragdrop");
@@ -807,7 +807,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // OLD v2 http://jsfiddle.net/chilipeppr/F2Qn3/
             // NEW v3 with onQueue/onWrite/onComplete http://jsfiddle.net/chilipeppr/a4g5ds5n/
             chilipeppr.load("#com-chilipeppr-gcode-list",
-                "http://fiddle.jshell.net/chilipeppr/a4g5ds5n/show/light/",
+                "http://raw.githubusercontent.com/chilipeppr/widget-gcodelist/master/auto-generated-widget.html",
 
                 function() {
                     cprequire(
@@ -826,7 +826,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // The new version supports onQueue, onWrite, onComplete
 
             chilipeppr.load("#com-chilipeppr-serialport-log",
-                "http://fiddle.jshell.net/chilipeppr/rczajbx0/show/light/",
+                "https://raw.githubusercontent.com/chilipeppr/widget-console/master/auto-generated-widget.html",
 
                 function() {
                     cprequire(
@@ -862,7 +862,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
     chilipeppr.load(
         "com-chilipeppr-xyz",
         // Lauer's new widget 8/16/15
-        "http://fiddle.jshell.net/chilipeppr/5zx269pa/show/light/", 
+        "http://raw.githubusercontent.com/chilipeppr/widget-axes/master/auto-generated-widget.html", 
         // Temporary widget from Danal
         //"http://fiddle.jshell.net/Danal/vktco1y6/show/light/", 
         // Lauer's original core widget
@@ -883,7 +883,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
     chilipeppr.load(
         "com-chilipeppr-tinyg",
         // Lauer's v2 (Jul 28th 2015) Fixed to {"sv":1}
-        "http://fiddle.jshell.net/chilipeppr/h458y7gt/show/light/",
+        "http://raw.githubusercontent.com/chilipeppr/widget-tinyg/master/auto-generated-widget.html",
         // Danal's version
         //"http://fiddle.jshell.net/Danal/6rq2wx3o/show/light/",
         // Lauer's version
