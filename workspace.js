@@ -71,15 +71,18 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
         init: function() {
 
             // Most workspaces will instantiate the Serial Port JSON Server widget
-            //this.loadSpjsWidget();
+            this.loadSpjsWidget();
+            
             // Most workspaces will instantiate the Serial Port Console widget
-            this.loadConsoleWidget(function() {
-                setTimeout(function() {
-                    $(window).trigger('resize');
-                }, 100);
-            });
+            this.loadConsoleWidget();
+            
+            // This is a huge method that was built from the original jsfiddle workspace
+            // we should technically put each widget in its own method for loading
+            this.loadWidgets();
+
             // Create our workspace upper right corner triangle menu
             this.loadWorkspaceMenu();
+            
             // Add our billboard to the menu (has name, url, picture of workspace)
             this.addBillboardToWorkspaceMenu();
 
@@ -88,11 +91,11 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // the height of the browser window. You could turn this off and
             // just set widget min-height in CSS instead
             this.setupResize();
+            
             setTimeout(function() {
                 $(window).trigger('resize');
-            }, 100);
+            }, 3000);
 
-            this.loadWidgets();
 
         },
         /**
@@ -135,8 +138,8 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             var that = this;
 
             chilipeppr.load(
-                "#com-chilipeppr-widget-serialport-instance",
-                "http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html",
+                "#com-chilipeppr-widget-spjs-instance",
+                "http://raw.githubusercontent.com/chilipeppr/widget-spjs/master/auto-generated-widget.html",
                 function() {
                     console.log("mycallback got called after loading spjs module");
                     cprequire(["inline:com-chilipeppr-widget-serialport"], function(spjs) {
@@ -144,9 +147,9 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         spjs.setSingleSelectMode();
                         spjs.init({
                             isSingleSelectMode: true,
-                            defaultBuffer: "default",
+                            defaultBuffer: "tinyg",
                             defaultBaud: 115200,
-                            bufferEncouragementMsg: 'For your device please choose the "default" buffer in the pulldown and a 115200 baud rate before connecting.'
+                            bufferEncouragementMsg: 'For your device please choose the "tinyg" or "tinygg2" buffer in the pulldown and a 115200 baud rate before connecting.'
                         });
                         //spjs.showBody();
                         //spjs.consoleToggle();
@@ -165,7 +168,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
         loadConsoleWidget: function(callback) {
             var that = this;
             chilipeppr.load(
-                "#com-chilipeppr-widget-spconsole-instance",
+                "#com-chilipeppr-widget-console-instance",
                 "http://raw.githubusercontent.com/chilipeppr/widget-console/master/auto-generated-widget.html",
                 function() {
                     // Callback after widget loaded into #com-chilipeppr-widget-spconsole-instance
@@ -183,7 +186,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                             // 2nd param is a regexp filter where the console will filter out
                             // annoying messages you don't generally want to see back from your
                             // device, but that the user can toggle on/off with the funnel icon
-                            that.widgetConsole.init(true, /myfilter/);
+                            that.widgetConsole.init(true, /^{/);
                             if (callback) callback(mywidget);
                         }
                     );
@@ -202,7 +205,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 function() {
                     require(['inline:com-chilipeppr-elem-pubsubviewer'], function(pubsubviewer) {
 
-                        var el = $('#' + that.id + ' .com-chilipeppr-ws-menu .dropdown-menu-ws');
+                        var el = $('#' + that.id + ' #com-chilipeppr-ws-menu .dropdown-menu-ws');
                         console.log("got callback for attachto menu for workspace. attaching to el:", el);
 
                         pubsubviewer.attachTo(
@@ -219,6 +222,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
 
         loadWidgets: function(callback) {
+            
             // Zipwhip texting
             // com-chilipeppr-ws-zipwhip
             chilipeppr.load(
@@ -228,7 +232,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     require(["inline:com-chilipeppr-elem-zipwhip"], function(zipwhip) {
                         zipwhip.init();
                         // setup toggle button
-                        var zwBtn = $('#com-chilipeppr-ws-gcode-menu .zipwhip-button');
+                        var zwBtn = $('#com-chilipeppr-ws-menu .zipwhip-button');
                         var zwDiv = $('#com-chilipeppr-ws-zipwhip');
                         zwBtn.click(function() {
                             if (zwDiv.hasClass("hidden")) {
@@ -255,7 +259,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     require(["inline:com-chilipeppr-widget-autolevel"], function(autolevel) {
                         autolevel.init();
                         // setup toggle button
-                        var alBtn = $('#com-chilipeppr-ws-gcode-menu .autolevel-button');
+                        var alBtn = $('#com-chilipeppr-ws-menu .autolevel-button');
                         var alDiv = $('#com-chilipeppr-ws-autolevel');
                         alBtn.click(function() {
                             if (alDiv.hasClass("hidden")) {
@@ -286,7 +290,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     cprequire(["inline:com-chilipeppr-widget-macro"], function(macro) {
                         macro.init();
                         // setup toggle button
-                        var alBtn = $('#com-chilipeppr-ws-gcode-menu .macro-button');
+                        var alBtn = $('#com-chilipeppr-ws-menu .macro-button');
                         var alDiv = $('#com-chilipeppr-ws-macro');
                         alBtn.click(function() {
                             if (alDiv.hasClass("hidden")) {
@@ -306,7 +310,6 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     });
                 }); //End Macro
 
-            //from this point on we pull from js fiddle, not migrated to github yet
             // JScut
             // com-chilipeppr-ws-jscut
             chilipeppr.load(
@@ -316,7 +319,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     require(["inline:org-jscut-gcode-widget"], function(jscut) {
                         jscut.init();
                         // setup toggle button
-                        var alBtn = $('#com-chilipeppr-ws-gcode-menu .jscut-button');
+                        var alBtn = $('#com-chilipeppr-ws-menu .jscut-button');
                         var alDiv = $('#com-chilipeppr-ws-jscut');
                         alBtn.click(function() {
                             if (alDiv.hasClass("hidden")) {
@@ -345,7 +348,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         ls.init();
                         ls.unactivateWidget();
                         // setup toggle button
-                        var alBtn = $('#com-chilipeppr-ws-gcode-menu .lasersolder-button');
+                        var alBtn = $('#com-chilipeppr-ws-menu .lasersolder-button');
                         var alDiv = $('#com-chilipeppr-ws-lasersolder');
                         alBtn.click(function() {
                             if (alDiv.hasClass("hidden")) {
@@ -372,133 +375,137 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // Setup drag/drop for BRD files on our own because we don't
             // want to instantiate the Eagle BRD codebase (i.e. load its massive
             // javascript files) until the user try requests that we do
-            var eagleObj = {
-                eagleBtn: null,
-                eagleDiv: null,
-                eagleInstance: null,
-                init: function() {
-                    this.eagleBtn = $('#com-chilipeppr-ws-gcode-menu .eagle-button');
-                    this.eagleDiv = $('#com-chilipeppr-ws-eagle');
-                    this.setupDragDrop();
-                    this.setupBtn();
-                    console.log("done instantiating micro Eagle BRD plug-in");
-                },
-                setupBtn: function() {
-                    this.eagleBtn.click(this.toggleEagle.bind(this));
-                },
-                toggleEagle: function() {
-                    if (this.eagleDiv.hasClass("hidden")) {
-                        // unhide
-                        this.showEagle();
-                    }
-                    else {
-                        this.hideEagle();
-                    }
-                },
-                showEagle: function(callback) {
-                    this.eagleDiv.removeClass("hidden");
-                    this.eagleBtn.addClass("active");
-
-                    // see if instantiated already
-                    // if so, just activate
-                    if (this.eagleInstance != null) {
-                        this.eagleInstance.activateWidget();
-                        if (callback) callback();
-                    }
-                    else {
-                        // otherwise, dynamic load
-                        var that = this;
-                        chilipeppr.load(
-                            "#com-chilipeppr-ws-eagle",
-                            //"http://fiddle.jshell.net/chilipeppr/3fe23xsr/show/light/", 
-                            "http://raw.githubusercontent.com/chilipeppr/widget-eagle/master/auto-generated-widget.html",
-                            function() {
-                                require(["inline:com-chilipeppr-widget-eagle"], function(eagle) {
-                                    that.eagleInstance = eagle;
-                                    console.log("Eagle BRD instantiated. eagleInstance:", that.eagleInstance);
-                                    that.eagleInstance.init();
-                                    //eagleInstance.activateWidget();
-                                    if (callback) callback();
-                                });
-                            }
-                        );
-                    }
-                    $(window).trigger('resize');
-                },
-                hideEagle: function() {
-                    this.eagleDiv.addClass("hidden");
-                    this.eagleBtn.removeClass("active");
-                    if (this.eagleInstance != null) {
-                        this.eagleInstance.unactivateWidget();
-                    }
-                    $(window).trigger('resize');
-                },
-                setupDragDrop: function() {
-                    // subscribe to events
-                    chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondragover", this, this.onDragOver);
-                    chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondragleave", this, this.onDragLeave);
-                    // /com-chilipeppr-elem-dragdrop/ondropped
-                    chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondropped", this, this.onDropped, 9); // default is 10, we do 9 to be higher priority
-                },
-                onDropped: function(data, info) {
-                    console.log("onDropped. len of file:", data.length, "info:", info);
-                    // we have the data
-                    // double check it's a board file, cuz it could be gcode
-                    if (data.match(/<!DOCTYPE eagle SYSTEM "eagle.dtd">/i)) {
-
-                        // check that there's a board tag
-                        if (data.match(/<board>/i)) {
-                            console.log("we have an eagle board file!");
-                            this.fileInfo = info;
-                            var that = this;
-                            this.showEagle(function() {
-                                console.log("got callback after showing eagle. now opening file.");
-                                that.eagleInstance.open(data, info);
-                            });
-                            console.log("opened brd file");
-
-                            // do NOT store a lastDropped, rather we should
-                            // get told from the workspace what the last file
-                            // was and if it was a BRD file we should auto-open
-                            /*
-                            localStorage.setItem('com-chilipeppr-widget-eagle-lastDropped', data);
-                            localStorage.setItem('com-chilipeppr-widget-eagle-lastDropped-info', JSON.stringify(info));
-                            console.log("saved brd file to localstorage");
-                            */
+            this.eagleObj = function() { 
+                return {
+                    eagleBtn: null,
+                    eagleDiv: null,
+                    eagleInstance: null,
+                    init: function() {
+                        this.eagleBtn = $('#com-chilipeppr-ws-menu .eagle-button');
+                        this.eagleDiv = $('#com-chilipeppr-ws-eagle');
+                        this.setupDragDrop();
+                        this.setupBtn();
+                        console.log("done instantiating micro Eagle BRD plug-in");
+                    },
+                    setupBtn: function() {
+                        this.eagleBtn.click(this.toggleEagle.bind(this));
+                    },
+                    toggleEagle: function() {
+                        if (this.eagleDiv.hasClass("hidden")) {
+                            // unhide
+                            this.showEagle();
                         }
                         else {
-                            console.log("looks like it is an eagle generated file, but not a board file. sad.");
-                            chilipeppr.publish('/com-chilipeppr-elem-flashmsg/flashmsg', "Looks like you dragged in an Eagle CAD file, but it contains no board tag. You may have dragged in a schematic instead. Please retry with a valid board file.");
+                            this.hideEagle();
                         }
-
-                        // now, we need to return false so no other widgets see this
-                        // drag/drop event because they won't know how to handle
-                        // an Eagle Brd file
-                        return false;
-                    }
-                    else {
-                        if (info && 'name' in info && info.name.match(/.brd$/i)) {
-                            // this looks like an Eagle brd file, but it's binary
-                            chilipeppr.publish('/com-chilipeppr-elem-flashmsg/flashmsg', "Error Loading Eagle BRD File", "Looks like you dragged in an Eagle BRD file, but it seems to be in binary. You can open this file in Eagle and then re-save it to a new file to create a text version of your Eagle BRD file.", 15 * 1000);
+                    },
+                    showEagle: function(callback) {
+                        this.eagleDiv.removeClass("hidden");
+                        this.eagleBtn.addClass("active");
+    
+                        // see if instantiated already
+                        // if so, just activate
+                        if (this.eagleInstance != null) {
+                            this.eagleInstance.activateWidget();
+                            if (callback) callback();
+                        }
+                        else {
+                            // otherwise, dynamic load
+                            var that = this;
+                            chilipeppr.load(
+                                "#com-chilipeppr-ws-eagle",
+                                //"http://fiddle.jshell.net/chilipeppr/3fe23xsr/show/light/", 
+                                "http://raw.githubusercontent.com/chilipeppr/widget-eagle/master/auto-generated-widget.html",
+                                function() {
+                                    require(["inline:com-chilipeppr-widget-eagle"], function(eagle) {
+                                        that.eagleInstance = eagle;
+                                        console.log("Eagle BRD instantiated. eagleInstance:", that.eagleInstance);
+                                        that.eagleInstance.init();
+                                        //eagleInstance.activateWidget();
+                                        if (callback) callback();
+                                    });
+                                }
+                            );
+                        }
+                        $(window).trigger('resize');
+                    },
+                    hideEagle: function() {
+                        this.eagleDiv.addClass("hidden");
+                        this.eagleBtn.removeClass("active");
+                        if (this.eagleInstance != null) {
+                            this.eagleInstance.unactivateWidget();
+                        }
+                        $(window).trigger('resize');
+                    },
+                    setupDragDrop: function() {
+                        // subscribe to events
+                        chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondragover", this, this.onDragOver);
+                        chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondragleave", this, this.onDragLeave);
+                        // /com-chilipeppr-elem-dragdrop/ondropped
+                        chilipeppr.subscribe("/com-chilipeppr-elem-dragdrop/ondropped", this, this.onDropped, 9); // default is 10, we do 9 to be higher priority
+                    },
+                    onDropped: function(data, info) {
+                        console.log("onDropped. len of file:", data.length, "info:", info);
+                        // we have the data
+                        // double check it's a board file, cuz it could be gcode
+                        if (data.match(/<!DOCTYPE eagle SYSTEM "eagle.dtd">/i)) {
+    
+                            // check that there's a board tag
+                            if (data.match(/<board>/i)) {
+                                console.log("we have an eagle board file!");
+                                this.fileInfo = info;
+                                var that = this;
+                                this.showEagle(function() {
+                                    console.log("got callback after showing eagle. now opening file.");
+                                    that.eagleInstance.open(data, info);
+                                });
+                                console.log("opened brd file");
+    
+                                // do NOT store a lastDropped, rather we should
+                                // get told from the workspace what the last file
+                                // was and if it was a BRD file we should auto-open
+                                /*
+                                localStorage.setItem('com-chilipeppr-widget-eagle-lastDropped', data);
+                                localStorage.setItem('com-chilipeppr-widget-eagle-lastDropped-info', JSON.stringify(info));
+                                console.log("saved brd file to localstorage");
+                                */
+                            }
+                            else {
+                                console.log("looks like it is an eagle generated file, but not a board file. sad.");
+                                chilipeppr.publish('/com-chilipeppr-elem-flashmsg/flashmsg', "Looks like you dragged in an Eagle CAD file, but it contains no board tag. You may have dragged in a schematic instead. Please retry with a valid board file.");
+                            }
+    
+                            // now, we need to return false so no other widgets see this
+                            // drag/drop event because they won't know how to handle
+                            // an Eagle Brd file
                             return false;
                         }
                         else {
-                            console.log("we do not have an eagle board file. sad.");
+                            if (info && 'name' in info && info.name.match(/.brd$/i)) {
+                                // this looks like an Eagle brd file, but it's binary
+                                chilipeppr.publish('/com-chilipeppr-elem-flashmsg/flashmsg', "Error Loading Eagle BRD File", "Looks like you dragged in an Eagle BRD file, but it seems to be in binary. You can open this file in Eagle and then re-save it to a new file to create a text version of your Eagle BRD file.", 15 * 1000);
+                                return false;
+                            }
+                            else {
+                                console.log("we do not have an eagle board file. sad.");
+                            }
                         }
-                    }
-                },
-                onDragOver: function() {
-                    console.log("onDragOver");
-                    $('#com-chilipeppr-widget-eagle').addClass("panel-primary");
-                    $('#com-chilipeppr-ws-gcode-menu .eagle-button').addClass("btn-primary");
-                },
-                onDragLeave: function() {
-                    console.log("onDragLeave");
-                    $('#com-chilipeppr-widget-eagle').removeClass("panel-primary");
-                    $('#com-chilipeppr-ws-gcode-menu .eagle-button').removeClass("btn-primary");
-                },
-            };
-            eagleObj.init();
+                    },
+                    onDragOver: function() {
+                        console.log("onDragOver");
+                        $('#com-chilipeppr-widget-eagle').addClass("panel-primary");
+                        $('#com-chilipeppr-ws-menu .eagle-button').addClass("btn-primary");
+                    },
+                    onDragLeave: function() {
+                        console.log("onDragLeave");
+                        $('#com-chilipeppr-widget-eagle').removeClass("panel-primary");
+                        $('#com-chilipeppr-ws-menu .eagle-button').removeClass("btn-primary");
+                    },
+                }; 
+                
+            }();
+            console.log("eagleObj:", this.eagleObj);
+            this.eagleObj.init();
             //End Eagle Brd Import
 
             // GPIO
@@ -506,12 +513,12 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
             // Dynamically load the GPIO widget, i.e. wait til user clicks on the button
             // first time.
-            var gpioObj = {
+            this.gpioObj = {
                 gpioBtn: null,
                 gpioDiv: null,
                 gpioInstance: null,
                 init: function() {
-                    this.gpioBtn = $('#com-chilipeppr-ws-gcode-menu .gpio-button');
+                    this.gpioBtn = $('#com-chilipeppr-ws-menu .gpio-button');
                     this.gpioDiv = $('#com-chilipeppr-ws-gpio');
                     this.setupBtn();
                     console.log("done instantiating GPIO add-on widget");
@@ -566,8 +573,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     $(window).trigger('resize');
                 },
             };
-            gpioObj.init();
-
+            this.gpioObj.init();
             //End GPIO
 
             // SuttleXpress
@@ -575,7 +581,8 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // the button first time.
             // uses generic object so can cut/paste easier for others (or create actual object)
             // lordmundi/btyfqk7w
-            var shuttlexpressObj = {
+            this.shuttlexpressObj = function() {
+                return {
                 id: "shuttlexpress",
                 //url: "http://fiddle.jshell.net/chilipeppr/27v59xLg/show/light/",
                 url: "http://raw.githubusercontent.com/chilipeppr/widget-shuttlexpress/master/auto-generated-widget.html",
@@ -584,7 +591,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 div: null,
                 instance: null,
                 init: function() {
-                    this.btn = $('#com-chilipeppr-ws-gcode-menu .' + this.id + '-button');
+                    this.btn = $('#com-chilipeppr-ws-menu .' + this.id + '-button');
                     this.div = $('#com-chilipeppr-ws-' + this.id + '');
                     this.setupBtn();
                     console.log('done instantiating ' + this.id + ' add-on widget');
@@ -637,19 +644,21 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     }
                     $(window).trigger('resize');
                 },
-            };
-            shuttlexpressObj.init();
+                }
+            }();
+            this.shuttlexpressObj.init();
             //End ShuttleXpress
 
             // Touch Plate
             // Dynamically load the Touch Plate widget, i.e. wait til user clicks on 
             // the button first time.
-            var touchPlateObj = {
+            this.touchPlateObj = function() {
+                return {
                 touchPlateBtn: null,
                 touchPlateDiv: null,
                 touchPlateInstance: null,
                 init: function() {
-                    this.touchPlateBtn = $('#com-chilipeppr-ws-gcode-menu .touchplate-button');
+                    this.touchPlateBtn = $('#com-chilipeppr-ws-menu .touchplate-button');
                     this.touchPlateDiv = $('#com-chilipeppr-ws-touchplate');
                     this.setupBtn();
                     console.log("done instantiating touchPlate add-on widget");
@@ -703,25 +712,25 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     }
                     $(window).trigger('resize');
                 },
-            };
-            touchPlateObj.init();
+                }
+            }();
+            this.touchPlateObj.init();
             //End Touch Plate
 
-        // Arduino / Atmel Firmware Programmer
-    // FIDDLE http://jsfiddle.net/chilipeppr/qcduvhkh/11/
+            // Arduino / Atmel Firmware Programmer
+            // FIDDLE http://jsfiddle.net/chilipeppr/qcduvhkh/11/
+            chilipeppr.load(
+                "com-chilipeppr-ws-programmer",
+                "http://raw.githubusercontent.com/chilipeppr/widget-programmer/master/auto-generated-widget.html",
+                require(["inline:com-chilipeppr-widget-programmer"], function (programmer) {
+                    programmer.init();
+                    // setup toggle button
+                    var btn = $('#com-chilipeppr-ws-menu .programmer-button');
+                    var div = $('#com-chilipeppr-ws-programmer');
+                    btn.click(programmer.show.bind(programmer));
+                })  
+            );  //End Arduino / Atmel Firmware Programmer
     
-    chilipeppr.load(
-        "com-chilipeppr-ws-programmer",
-        "http://raw.githubusercontent.com/chilipeppr/widget-programmer/master/auto-generated-widget.html",
-        require(["inline:com-chilipeppr-widget-programmer"], function (programmer) {
-            programmer.init();
-            // setup toggle button
-            var btn = $('#com-chilipeppr-ws-gcode-menu .programmer-button');
-            var div = $('#com-chilipeppr-ws-programmer');
-            btn.click(programmer.show.bind(programmer));
-        })  
-    );  //End Arduino / Atmel Firmware Programmer
-
             // Element / Drag Drop
             // Load the dragdrop element into workspace toolbar
             // http://jsfiddle.net/chilipeppr/Z9F6G/
@@ -751,10 +760,8 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         });
                         console.log(dd);
                     });
-                }); //End Element / Drag Drop
-
-            //do I need billboard?  I think it's already taken care of.
-            
+                }
+            ); //End Element / Drag Drop
             
             // 3D Viewer
             // http://jsfiddle.net/chilipeppr/y3HRF
@@ -762,18 +769,18 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 "#com-chilipeppr-3dviewer",
                 //"http://fiddle.jshell.net/chilipeppr/y3HRF/show/light/",
                 "http://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html",
-
+    
                 function() {
                     console.log("got callback done loading 3d");
-
+    
                     cprequire(
                         ['inline:com-chilipeppr-widget-3dviewer'],
-
+    
                         function(threed) {
                             console.log("Running 3dviewer");
                             threed.init();
                             console.log("3d viewer initted");
-
+    
                             // Ok, do someting whacky. Try to move the 3D Viewer 
                             // Control Panel to the center column
                             setTimeout(function() {
@@ -782,7 +789,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                                 $('#com-chilipeppr-widget-3dviewer').addClass("nomargin");
                                 $('#com-chilipeppr-3dviewer-controlpanel').append(element);
                             }, 10);
-
+    
                             // listen to resize events so we can resize our 3d viewer
                             // this was done to solve the scrollbar residue we were seeing
                             // resize this console on a browser resize
@@ -797,11 +804,12 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                                     console.log("3d view force resize. 1 sec later");
                                     threed.resize();
                                 }, 1000);
-
+    
                             });
-                        });
-
-                }); //End 3D Viewer
+                        }
+                    );
+                }
+            ); //End 3D Viewer
 
             // Gcode List v3
             // OLD v2 http://jsfiddle.net/chilipeppr/F2Qn3/
@@ -817,14 +825,15 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                             gcodelist.init({
                                 lineNumbersOnByDefault: true
                             });
-                        });
-                }); //End Gcode List v3
+                        }
+                    );
+                }
+            ); //End Gcode List v3
 
             // Serial Port Console Log Window
             // http://jsfiddle.net/chilipeppr/JB2X7/
             // NEW VERSION http://jsfiddle.net/chilipeppr/rczajbx0/
             // The new version supports onQueue, onWrite, onComplete
-
             chilipeppr.load("#com-chilipeppr-serialport-log",
                 "https://raw.githubusercontent.com/chilipeppr/widget-console/master/auto-generated-widget.html",
 
@@ -853,98 +862,73 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                             // from the gcode viewer widget
                             chilipeppr.subscribe("/com-chilipeppr-widget-gcode/resize", spc, spc.resize);
 
-                        });
-                }); //End Serial Port Console Log Window
+                        }
+                    );
+                }
+            ); //End Serial Port Console Log Window
 
 
-                // XYZ
-    // http://jsfiddle.net/chilipeppr/gh45j/
-    chilipeppr.load(
-        "com-chilipeppr-xyz",
-        // Lauer's new widget 8/16/15
-        "http://raw.githubusercontent.com/chilipeppr/widget-axes/master/auto-generated-widget.html", 
-        // Temporary widget from Danal
-        //"http://fiddle.jshell.net/Danal/vktco1y6/show/light/", 
-        // Lauer's original core widget
-        //"http://fiddle.jshell.net/chilipeppr/gh45j/show/light/",
-
-    function () {
-        cprequire(
-        ["inline:com-chilipeppr-widget-xyz"],
-
-        function (xyz) {
-            xyz.init();
-        });
-    }); //End XYZ
+            // XYZ
+            // http://jsfiddle.net/chilipeppr/gh45j/
+            chilipeppr.load(
+                "com-chilipeppr-xyz",
+                // Lauer's new widget 8/16/15
+                "http://raw.githubusercontent.com/chilipeppr/widget-axes/master/auto-generated-widget.html", 
+                // Temporary widget from Danal
+                //"http://fiddle.jshell.net/Danal/vktco1y6/show/light/", 
+                // Lauer's original core widget
+                //"http://fiddle.jshell.net/chilipeppr/gh45j/show/light/",
+        
+                function () {
+                    cprequire(
+                    ["inline:com-chilipeppr-widget-xyz"],
             
-                        // TinyG
-    // http://jsfiddle.net/chilipeppr/XxEBZ/
-    // com-chilipeppr-tinyg
-    chilipeppr.load(
-        "com-chilipeppr-tinyg",
-        // Lauer's v2 (Jul 28th 2015) Fixed to {"sv":1}
-        "http://raw.githubusercontent.com/chilipeppr/widget-tinyg/master/auto-generated-widget.html",
-        // Danal's version
-        //"http://fiddle.jshell.net/Danal/6rq2wx3o/show/light/",
-        // Lauer's version
-        //"http://fiddle.jshell.net/chilipeppr/XxEBZ/show/light/",
+                    function (xyz) {
+                        xyz.init();
+                    });
+                }
+            ); //End XYZ
+            
+            // TinyG
+            // http://jsfiddle.net/chilipeppr/XxEBZ/
+            // com-chilipeppr-tinyg
+            chilipeppr.load(
+                "com-chilipeppr-tinyg",
+                // Lauer's v2 (Jul 28th 2015) Fixed to {"sv":1}
+                "http://raw.githubusercontent.com/chilipeppr/widget-tinyg/master/auto-generated-widget.html",
+                // Danal's version
+                //"http://fiddle.jshell.net/Danal/6rq2wx3o/show/light/",
+                // Lauer's version
+                //"http://fiddle.jshell.net/chilipeppr/XxEBZ/show/light/",
+        
+                function () {
+                    cprequire(
+                    ["inline:com-chilipeppr-widget-tinyg"],
+            
+                    function (tinyg) {
+                        tinyg.init();
+                    });
+                }
+            ); //End TinyG
 
-    function () {
-        cprequire(
-        ["inline:com-chilipeppr-widget-tinyg"],
-
-        function (tinyg) {
-            tinyg.init();
-        });
-    }); //End TinyG
-
-        // WebRTC Client com-chilipeppr-webrtcclient
-    /*
-    chilipeppr.load(
-        "com-chilipeppr-webrtcclient",
-        "http://fiddle.jshell.net/chilipeppr/qWj4f/show/light/",
-
-    function () {
-        cprequire(
-        ["inline:com-chilipeppr-widget-webrtc-client"],
-
-        function (webrtcclient) {
-            webrtcclient.init();
-        });
-    }); //End WebRTC Client
-*/
-
-
-    // Serial Port Selector
-    // http://jsfiddle.net/chilipeppr/4RgrS/
-    // NEW VERSION for SPJS v1.7 http://jsfiddle.net/chilipeppr/vetj5fvx/
-    chilipeppr.load("com-chilipeppr-serialport-spselector",
-        "http://raw.githubusercontent.com/chilipeppr/widget-spjs/master/auto-generated-widget.html",
-
-    function () {
-        cprequire(
-        ["inline:com-chilipeppr-widget-serialport"],
-
-        function (sp) {
-            sp.setSingleSelectMode();
-            //sp.init("192.168.1.7");
-            // We have a new TinyG buffer built into the serial
-            // port server. This asks the serial port widget to
-            // request the tinyg buffer. Make sure you ARE connected
-            // to a tinyg cuz it looks for a {"qr":""} response to release
-            // the flow
-            sp.init(null, "tinyg", 115200);
-            //$('.com-chilipeppr-widget-serialport-console').removeClass("hidden");
-            //$('.com-chilipeppr-widget-serialport-consoleinput').removeClass("hidden");
-            //$('.com-chilipeppr-widget-serialport-status').removeClass("hidden");
-        });
-    }); //End Serial Port Selector
-
+            // WebRTC Client com-chilipeppr-webrtcclient
+            /*
+            chilipeppr.load(
+                "com-chilipeppr-webrtcclient",
+                "http://fiddle.jshell.net/chilipeppr/qWj4f/show/light/",
+        
+            function () {
+                cprequire(
+                ["inline:com-chilipeppr-widget-webrtc-client"],
+        
+                function (webrtcclient) {
+                    webrtcclient.init();
+                });
+            }); //End WebRTC Client
+            */
 
         },
         //end loadWidgets
-
-
 
     }
 });

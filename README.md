@@ -1,7 +1,7 @@
 # com-chilipeppr-workspace-tinyg
 This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG.
 
-
+![alt text](screenshot.png "Screenshot")
 
 ## ChiliPeppr Workspace / TinyG
 
