@@ -1,0 +1,145 @@
+.zipwhip-button {
+    line-height:0px;
+    padding: 1px 2px;
+}
+.zipwhip {
+    background: url('http://www.zipwhip.com/resources/images/favicon.ico') no-repeat top left;
+    display: inline-block;
+    margin: 1px 0;
+    height: 16px;
+    width: 16px;
+    /* line-height:0px; */
+    background-size: 16px 16px;
+    /* -webkit-background-size: 50% 50%; Safari
+    -khtml-background-size: 50% 50%; Konqueror
+    -moz-background-size: 50% 50%; Firefox */
+}
+#com-chilipeppr-ws-gcode-wrapper .dropdown-menu {
+    /* z-index:6; */
+    /* position:inherit; */
+}
+#com-chilipeppr-ws-gcode-wrapper .panel-heading {
+    /* padding: 10px 12px; */
+}
+#com-chilipeppr-ws-gcode-wrapper .well.com-chilipeppr-ws-hdr {
+    /* padding: 10px 15px; */
+}
+#com-chilipeppr-ws-gcode-dragdrop {
+    margin-right:6px;
+}
+#com-chilipeppr-ws-gcode-hdr {
+    margin-bottom:10px;
+}
+.panel {
+    margin-bottom:10px;
+}
+#com-chilipeppr-ws-gcode-wrapper #com-chilipeppr-widget-gcode-body {
+    /* max-height:250px; */
+    height:250px;
+}
+#com-chilipeppr-ws-gcode-wrapper .com-chilipeppr-widget-spconsole {
+    margin-bottom:0;
+}
+#com-chilipeppr-ws-gcode-dragdropoverlay {
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:10;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    padding:100px;
+    border: 3px dashed #3276b1;
+    text-align:center;
+    pointer-events: none;
+}
+#com-chilipeppr-ws-gcode-dragdropoverlay .well {
+    background-color: rgba(127, 127, 127, 0.5);
+}
+#com-chilipeppr-ws-gcode-wrapper.hover {
+    /* background-color: blue; */
+}
+.com-chilipeppr-elem-dragdrop {
+    /* border: 1px dashed gray; */
+    /* border-radius: 4px; */
+    padding:0;
+    margin-right:6px;
+}
+.padrt {
+    padding-right:10px;
+    padding-left:10px;
+}
+.zhigh {
+    /* z-index:5; */
+    position:relative;
+}
+#com-chilipeppr-ws-gcode-wrapper .dropdown-menu {
+    /* z-index:20; */
+}
+#mainnav {
+    z-index:5;
+}
+.nopadding {
+    padding:0;
+}
+#com-chilipeppr-widget-3dviewer .panel-heading, #com-chilipeppr-3dviewer-controlpanel .panel-heading {
+    background:none;
+    /* border:none; */
+    padding:10px 15px;
+    margin-bottom:0;
+}
+#com-chilipeppr-3dviewer-controlpanel {
+    padding:0 10px;
+    float:left;
+}
+#com-chilipeppr-gcode-list {
+    /* padding-right: 10px; */
+    /* z-index:5; */
+    /* position: relative; */
+}
+#com-chilipeppr-serialport-ws-hdr {
+    /* z-index:5; */
+}
+.well.com-chilipeppr-ws-hdr {
+    padding:10px 15px;
+    /* padding:8px; */
+    /* padding-left:15px; */
+    /* margin:0; */
+    /* margin-bottom:10px; */
+}
+#chilipeppr-3dviewer {
+    /* z-index: -1; */
+    padding-right:10px;
+}
+#com-chilipeppr-widget-3dviewer-renderArea {
+    /* z-index:0; */
+}
+.row .widget {
+    margin:0;
+    padding:0;
+}
+.dropArea.hover {
+    background: #dddddd;
+}
+#pnlWorkspace.hover {
+    background: red;
+}
+body.hover {
+    background: #5bc0de;
+}
+#chilipeppr-serialport-wrapper .com-chilipeppr-widget-serialport-spselector {
+    max-height: none;
+}
+#chilipeppr-serialport-log {
+    /*height:200px;*/
+    /* padding-right:10px; */
+    /* z-index:5; */
+    /* position: relative; */
+}
+.nomargin {
+    margin:0;
+}
+.noheight {
+    height:0;
+}
