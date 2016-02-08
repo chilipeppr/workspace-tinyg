@@ -250,6 +250,76 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 }); //End Zipwhip texting
 
 
+            // Zipwhip Recieve Text widget
+            // Dynamically load the Zipwhip Recieve Text widget, i.e. wait til user clicks on the button
+            // first time.
+            this.zipwhipRecvTextObj = {
+                zipwhipRecvTextBtn: null,
+                zipwhipRecvTextDiv: null,
+                zipwhipRecvTextInstance: null,
+                init: function() {
+                    this.zipwhipRecvTextBtn = $('#com-chilipeppr-ws-menu .zipwhip-recvtext-button');
+                    this.zipwhipRecvTextDiv = $('#com-chilipeppr-ws-zipwhip-recvtext');
+                    this.setupBtn();
+                    console.log("done instantiating zipwhipRecvText add-on widget");
+                },
+                setupBtn: function() {
+                    this.zipwhipRecvTextBtn.click(this.togglezipwhipRecvText.bind(this));
+                },
+                togglezipwhipRecvText: function() {
+                    if (this.zipwhipRecvTextDiv.hasClass("hidden")) {
+                        // unhide
+                        this.showzipwhipRecvText();
+                    }
+                    else {
+                        this.hidezipwhipRecvText();
+                    }
+                },
+                showzipwhipRecvText: function(callback) {
+                    this.zipwhipRecvTextDiv.removeClass("hidden");
+                    this.zipwhipRecvTextBtn.addClass("active");
+
+                    // see if instantiated already
+                    // if so, just activate
+                    if (this.zipwhipRecvTextInstance != null) {
+                        this.zipwhipRecvTextInstance.activateWidget();
+                        if (callback) callback();
+                    }
+                    else {
+                        // otherwise, dynamic load
+                        var that = this;
+                        chilipeppr.load(
+                          this.zipwhipRecvTextDiv.prop("id"),
+                          "http://raw.githubusercontent.com/chilipeppr/widget-recvtext/master/auto-generated-widget.html",
+                          function() {
+                            // Callback after widget loaded into #myDivWidgetRecvtext
+                            // Now use require.js to get reference to instantiated widget
+                            cprequire(
+                              ["inline:com-chilipeppr-widget-recvtext"], // the id you gave your widget
+                              function(myObjWidgetRecvtext) {
+                                // Callback that is passed reference to the newly loaded widget
+                                console.log("Widget / Zipwhip Receive Text just got loaded.", myObjWidgetRecvtext);
+                                myObjWidgetRecvtext.init();
+                                if (callback) callback();
+                              }
+                            );
+                          }
+                        );
+                    }
+                    $(window).trigger('resize');
+                },
+                hidezipwhipRecvText: function() {
+                    this.zipwhipRecvTextDiv.addClass("hidden");
+                    this.zipwhipRecvTextBtn.removeClass("active");
+                    if (this.zipwhipRecvTextInstance != null) {
+                        this.zipwhipRecvTextInstance.unactivateWidget();
+                    }
+                    $(window).trigger('resize');
+                },
+            };
+            this.zipwhipRecvTextObj.init();
+            //End Zipwhip Receive Text
+            
             // Auto-Leveller
             // com-chilipeppr-ws-autolevel
             chilipeppr.load(

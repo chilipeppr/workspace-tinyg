@@ -18,6 +18,9 @@
     line-height:0px;
     padding: 1px 2px;
 }
+.zipwhip-recvtext-button {
+    height:22px;
+}
 .zipwhip {
     background: url('http://www.zipwhip.com/resources/images/favicon.ico') no-repeat top left;
     display: inline-block;
@@ -461,6 +464,76 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 }); //End Zipwhip texting
 
 
+            // Zipwhip Recieve Text widget
+            // Dynamically load the Zipwhip Recieve Text widget, i.e. wait til user clicks on the button
+            // first time.
+            this.zipwhipRecvTextObj = {
+                zipwhipRecvTextBtn: null,
+                zipwhipRecvTextDiv: null,
+                zipwhipRecvTextInstance: null,
+                init: function() {
+                    this.zipwhipRecvTextBtn = $('#com-chilipeppr-ws-menu .zipwhip-recvtext-button');
+                    this.zipwhipRecvTextDiv = $('#com-chilipeppr-ws-zipwhip-recvtext');
+                    this.setupBtn();
+                    console.log("done instantiating zipwhipRecvText add-on widget");
+                },
+                setupBtn: function() {
+                    this.zipwhipRecvTextBtn.click(this.togglezipwhipRecvText.bind(this));
+                },
+                togglezipwhipRecvText: function() {
+                    if (this.zipwhipRecvTextDiv.hasClass("hidden")) {
+                        // unhide
+                        this.showzipwhipRecvText();
+                    }
+                    else {
+                        this.hidezipwhipRecvText();
+                    }
+                },
+                showzipwhipRecvText: function(callback) {
+                    this.zipwhipRecvTextDiv.removeClass("hidden");
+                    this.zipwhipRecvTextBtn.addClass("active");
+
+                    // see if instantiated already
+                    // if so, just activate
+                    if (this.zipwhipRecvTextInstance != null) {
+                        this.zipwhipRecvTextInstance.activateWidget();
+                        if (callback) callback();
+                    }
+                    else {
+                        // otherwise, dynamic load
+                        var that = this;
+                        chilipeppr.load(
+                          this.zipwhipRecvTextDiv.prop("id"),
+                          "http://raw.githubusercontent.com/chilipeppr/widget-recvtext/master/auto-generated-widget.html",
+                          function() {
+                            // Callback after widget loaded into #myDivWidgetRecvtext
+                            // Now use require.js to get reference to instantiated widget
+                            cprequire(
+                              ["inline:com-chilipeppr-widget-recvtext"], // the id you gave your widget
+                              function(myObjWidgetRecvtext) {
+                                // Callback that is passed reference to the newly loaded widget
+                                console.log("Widget / Zipwhip Receive Text just got loaded.", myObjWidgetRecvtext);
+                                myObjWidgetRecvtext.init();
+                                if (callback) callback();
+                              }
+                            );
+                          }
+                        );
+                    }
+                    $(window).trigger('resize');
+                },
+                hidezipwhipRecvText: function() {
+                    this.zipwhipRecvTextDiv.addClass("hidden");
+                    this.zipwhipRecvTextBtn.removeClass("active");
+                    if (this.zipwhipRecvTextInstance != null) {
+                        this.zipwhipRecvTextInstance.unactivateWidget();
+                    }
+                    $(window).trigger('resize');
+                },
+            };
+            this.zipwhipRecvTextObj.init();
+            //End Zipwhip Receive Text
+            
             // Auto-Leveller
             // com-chilipeppr-ws-autolevel
             chilipeppr.load(
@@ -1184,6 +1257,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
                                 <div id="com-chilipeppr-ws-gcode-dragdrop" style="margin-right:6px;" class=""></div>
                                 <button type="button" class="btn btn-xs btn-default zipwhip-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Get a text sent to you when your CNC job is completed." data-trigger="hover" data-delay="100"><span class="zipwhip"></span></button>
+                                <button type="button" class="btn btn-xs btn-default zipwhip-recvtext-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Login to Zipwhip to receive texts and start a CNC job when the text is received." data-trigger="hover" data-delay="100"><span class="zipwhip"></span><div style="float:left;">Recv</div></button>
                                 <button type="button" class="btn btn-xs btn-default autolevel-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Allows you to auto-level your PCB before milling. Most raw PCB boards have a slight warpage. This widget lets you probe the warpage and then it auto-scales your Gcode to match the warpage so you get very clean/predictable z-positions in your milling job."
                                 data-trigger="hover" data-delay="100">Auto-Level</button>
                                 <button type="button" class="btn btn-xs btn-default macro-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Run a macro." data-trigger="hover" data-delay="100">Macro</button>
@@ -1203,6 +1277,9 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         </div>
                         <!-- Zipwhip Text Messaging -->
                         <div class="zhigh hidden" id="com-chilipeppr-ws-zipwhip"></div>
+                        
+                        <!-- Zipwhip Text Messaging Receive Text widget -->
+                        <div class="zhigh hidden" id="com-chilipeppr-ws-zipwhip-recvtext"></div>
 
                         <!-- Auto Leveller -->
                         <div class="zhigh hidden" id="com-chilipeppr-ws-autolevel">Auto-Level Here</div>

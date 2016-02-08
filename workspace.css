@@ -2,6 +2,9 @@
     line-height:0px;
     padding: 1px 2px;
 }
+.zipwhip-recvtext-button {
+    height:22px;
+}
 .zipwhip {
     background: url('http://www.zipwhip.com/resources/images/favicon.ico') no-repeat top left;
     display: inline-block;
