@@ -282,11 +282,13 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     // see if instantiated already
                     // if so, just activate
                     if (this.zipwhipRecvTextInstance != null) {
+                        console.log("activating zipwhip recv text instead of re-instantiating cuz already created")
                         this.zipwhipRecvTextInstance.activateWidget();
                         if (callback) callback();
                     }
                     else {
                         // otherwise, dynamic load
+                        console.log("zipwhip recv text appears to not be instantiated, let us load it from scratch")
                         var that = this;
                         chilipeppr.load(
                           this.zipwhipRecvTextDiv.prop("id"),
