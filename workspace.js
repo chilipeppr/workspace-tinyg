@@ -764,7 +764,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                             "#com-chilipeppr-ws-touchplate",
                             "http://raw.githubusercontent.com/PyroAVR/widget-super-touchplate/master/auto-generated-widget.html",
                             function() {
-                                require(["inline:com-chilipeppr-widget-touchplate"], function(touchPlate) {
+                                require(["inline:com-chilipeppr-widget-super-touchplate"], function(touchPlate) {
                                     that.touchPlateInstance = touchPlate;
                                     console.log("touchPlate instantiated. touchPlateInstance:", that.touchPlateInstance);
                                     that.touchPlateInstance.init();
