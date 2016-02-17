@@ -213,7 +213,7 @@ body.hover {
     <script type='text/javascript'>
     //<![CDATA[
 /* global cpdefine chilipeppr cprequire */
-cprequire_test(["inline:com-chilipeppr-workspace-tinyg"], function(ws) {
+cprequire_test(["inline:com-chilipeppr-workspace-pyroavr-tinyg"], function(ws) {
 
     console.log("initting workspace");
 
@@ -247,12 +247,12 @@ cprequire_test(["inline:com-chilipeppr-workspace-tinyg"], function(ws) {
 } /*end_test*/ );
 
 // This is the main definition of your widget. Give it a unique name.
-cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function() {
+cpdefine("inline:com-chilipeppr-workspace-pyroavr-tinyg", ["chilipeppr_ready"], function() {
     return {
         /**
          * The ID of the widget. You must define this and make it unique.
          */
-        id: "com-chilipeppr-workspace-tinyg", // Make the id the same as the cpdefine id
+        id: "com-chilipeppr-workspace-pyroavr-tinyg", // Make the id the same as the cpdefine id
         name: "Workspace / TinyG", // The descriptive name of your widget.
         desc: `This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG.`,
         url: "http://raw.githubusercontent.com/PyroAVR/pyroavr-tinyg/master/auto-generated-workspace.html", // The final URL of the working widget as a single HTML file with CSS and Javascript inlined. You can let runme.js auto fill this if you are using Cloud9.
@@ -1228,7 +1228,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
     <div id="com-chilipeppr-widget-flash-instance"></div>
     <!--not sure which version to keep-->
 
-    <div id="com-chilipeppr-workspace-tinyg" class="xhidden">
+    <div id="com-chilipeppr-workspace-pyroavr-tinyg" class="xhidden">
         <div id="com-chilipeppr-ws-gcode-wrapper" class="dropArea">
             <div id="com-chilipeppr-ws-gcode-dragdropoverlay" class="hidden">
                 <div class="well">Drag and Drop Gcode Files Onto Browser Window</div>
@@ -1339,7 +1339,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
     </div>
 
     <!-- Keep this div hidden so it can be cloned and used by the Javascript -->
-    <div id="com-chilipeppr-workspace-tinyg-billboard" class="hidden">
+    <div id="com-chilipeppr-workspace-pyroavr-tinyg-billboard" class="hidden">
         <div class="billboard-content">
             <h4 class="billboard-title" style="">TinyG Workspace</h4>
 
