@@ -935,7 +935,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             this.shuttlexpressObj.init();
             //End ShuttleXpress
 
-            // Touch Plate
+            // SUPER Touch Plate
             // Dynamically load the Touch Plate widget, i.e. wait til user clicks on 
             // the button first time.
             this.touchPlateObj = function() {
@@ -976,7 +976,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         var that = this;
                         chilipeppr.load(
                             "#com-chilipeppr-ws-touchplate",
-                            "http://raw.githubusercontent.com/chilipeppr/widget-touchplate/master/auto-generated-widget.html",
+                            "http://raw.githubusercontent.com/PyroAVR/widget-super-touchplate/master/auto-generated-widget.html",
                             function() {
                                 require(["inline:com-chilipeppr-widget-touchplate"], function(touchPlate) {
                                     that.touchPlateInstance = touchPlate;
@@ -1273,7 +1273,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                                 <button type="button" class="btn btn-xs btn-default shuttlexpress-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="ShuttleXpress Jog Dial." data-trigger="hover" data-delay="100">ShuttleXpress</button>
 
                                 <button type="button" class="btn btn-xs btn-default touchplate-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Use a touch plate to easily figure out your Z zero of your workpiece and set it." data-trigger="hover"
-                                data-delay="100">Touch Plate</button>
+                                data-delay="100">Super Touch Plate</button>
 
                                 <button type="button" class="btn btn-xs btn-default programmer-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Program your Arduino or Atmel chip directly from ChiliPeppr." data-trigger="hover" data-delay="100">Arduino / Atmel Firmware Uploader</button>
                             </div>
