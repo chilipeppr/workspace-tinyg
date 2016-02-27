@@ -223,6 +223,130 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
         loadWidgets: function(callback) {
             
+            // create a workspace object reference to this so inside the anonymous functions below
+            // the workspace can be referred to
+            var wsObj = this;
+
+            // Inject the SVG2Gcode widget
+            $('<div class="zhigh" id="com-chilipeppr-ws-svg2gcode"></div>')
+                .insertAfter('#com-chilipeppr-ws-zipwhip-recvtext');
+
+            this.svg2gcodeObj = function() {
+                return {
+                    name: "svg2gcode",
+                    url: "http://raw.githubusercontent.com/chilipeppr/widget-svg2gcode/master/auto-generated-widget.html",
+                    id: "com-zipwhip-widget-svg2gcode",
+                    btn: $('#com-chilipeppr-ws-menu .svg2gcode-button'),
+                    div: $('#com-chilipeppr-ws-svg2gcode'),
+                    instance: null,
+                    init: function() {
+                        this.btn.click(this.toggle.bind(this));
+                        console.log("done instantiating " + this.name + " add-on widget");
+                    },
+                    toggle: function() {
+                        if (this.div.hasClass("hidden")) {
+                            // unhide
+                            this.show();
+                        }
+                        else {
+                            this.hide();
+                        }
+                    },
+                    show: function(callback) {
+                        this.div.removeClass("hidden");
+                        this.btn.addClass("active");
+    
+                        console.log("got show for " + this.name + ", this:", this, "wsObj:", wsObj);
+                        
+                        // see if instantiated already
+                        // if so, just activate
+                        if (this.instance != null) {
+                            console.log("activating " + this.name + " instead of re-instantiating cuz already created");
+                            this.instance.activate();
+                            if (callback) callback(this.instance);
+                        }
+                        else {
+                            // otherwise, dynamic load
+                            console.log(this.name + " appears to not be instantiated, let us load it from scratch")
+                            var that = this;
+                            chilipeppr.load(
+                              this.div.prop("id"),
+                              this.url,
+                              function() {
+                                // Callback after widget loaded into #myDivWidgetRecvtext
+                                // Now use require.js to get reference to instantiated widget
+                                cprequire(
+                                  ["inline:" + that.id], // the id you gave your widget
+                                  function(myObjWidget) {
+                                    // Callback that is passed reference to the newly loaded widget
+                                    console.log(that.name + " just got loaded.", myObjWidget);
+                                    myObjWidget.init();
+                                    that.instance = myObjWidget;
+                                    if (callback) callback(that.instance);
+                                  }
+                                );
+                              }
+                            );
+                        }
+                        $(window).trigger('resize');
+                    },
+                    hide: function() {
+                        this.div.addClass("hidden");
+                        this.btn.removeClass("active");
+                        
+                        console.log("got hide for " + this.name + ". this:", this, "wsObj:", wsObj);
+                        
+                        if (this.instance != null) {
+                            this.instance.unactivate();
+                        }
+                        $(window).trigger('resize');
+                    }
+                };
+            }();
+            this.svg2gcodeObj.init();
+            //End SVG2Gcode
+            
+            chilipeppr.load(
+              "#com-chilipeppr-ws-svg2gcode",
+              "http://raw.githubusercontent.com/chilipeppr/widget-svg2gcode/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivComZipwhipWidgetSvg2gcode
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-zipwhip-widget-svg2gcode"], // the id you gave your widget
+                  function(myObjComZipwhipWidgetSvg2gcode) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / svg2gcode just got loaded.", myObjComZipwhipWidgetSvg2gcode);
+                    myObjComZipwhipWidgetSvg2gcode.init();
+                  }
+                );
+              }
+            );
+
+            
+            // Inject the Font2Gcode widget
+            /*
+            $('<div class="zhigh" id="com-chilipeppr-ws-font2gcode"></div>')
+                .insertAfter('#com-chilipeppr-ws-zipwhip-recvtext');
+
+            chilipeppr.load(
+              "#com-chilipeppr-ws-font2gcode",
+              "http://raw.githubusercontent.com/chilipeppr/widget-font2gcode/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivComZipwhipWidgetFont2gcode
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-zipwhip-widget-font2gcode"], // the id you gave your widget
+                  function(myObjComZipwhipWidgetFont2gcode) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / Font2Gcode just got loaded.", myObjComZipwhipWidgetFont2gcode);
+                    //myObjComZipwhipWidgetFont2gcode.init();
+                  }
+                );
+              }
+            );
+            */
+
             // Zipwhip texting
             // com-chilipeppr-ws-zipwhip
             chilipeppr.load(
@@ -253,7 +377,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // Zipwhip Recieve Text widget
             // Dynamically load the Zipwhip Recieve Text widget, i.e. wait til user clicks on the button
             // first time.
-            this.zipwhipRecvTextObj = {
+            wsObj.zipwhipRecvTextObj = {
                 zipwhipRecvTextBtn: null,
                 zipwhipRecvTextDiv: null,
                 zipwhipRecvTextInstance: null,
@@ -279,12 +403,14 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     this.zipwhipRecvTextDiv.removeClass("hidden");
                     this.zipwhipRecvTextBtn.addClass("active");
 
+                    console.log("got showzipwhipRecvText. this:", this, "wsObj:", wsObj);
+                    
                     // see if instantiated already
                     // if so, just activate
                     if (this.zipwhipRecvTextInstance != null) {
                         console.log("activating zipwhip recv text instead of re-instantiating cuz already created")
                         this.zipwhipRecvTextInstance.activateWidget();
-                        if (callback) callback();
+                        if (callback) callback(this.zipwhipRecvTextInstance);
                     }
                     else {
                         // otherwise, dynamic load
@@ -302,7 +428,8 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                                 // Callback that is passed reference to the newly loaded widget
                                 console.log("Widget / Zipwhip Receive Text just got loaded.", myObjWidgetRecvtext);
                                 myObjWidgetRecvtext.init();
-                                if (callback) callback();
+                                that.zipwhipRecvTextInstance = myObjWidgetRecvtext;
+                                if (callback) callback(that.zipwhipRecvTextInstance);
                               }
                             );
                           }
@@ -313,13 +440,16 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 hidezipwhipRecvText: function() {
                     this.zipwhipRecvTextDiv.addClass("hidden");
                     this.zipwhipRecvTextBtn.removeClass("active");
+                    
+                    console.log("got hidezipwhipRecvText. this:", this, "wsObj:", wsObj);
+                    
                     if (this.zipwhipRecvTextInstance != null) {
                         this.zipwhipRecvTextInstance.unactivateWidget();
                     }
                     $(window).trigger('resize');
                 },
             };
-            this.zipwhipRecvTextObj.init();
+            wsObj.zipwhipRecvTextObj.init();
             //End Zipwhip Receive Text
             
             // Auto-Leveller
