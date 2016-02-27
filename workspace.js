@@ -227,10 +227,6 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             // the workspace can be referred to
             var wsObj = this;
 
-            // Inject the SVG2Gcode widget
-            $('<div class="zhigh" id="com-chilipeppr-ws-svg2gcode"></div>')
-                .insertAfter('#com-chilipeppr-ws-zipwhip-recvtext');
-
             this.svg2gcodeObj = function() {
                 return {
                     name: "svg2gcode",
@@ -280,7 +276,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                                   function(myObjWidget) {
                                     // Callback that is passed reference to the newly loaded widget
                                     console.log(that.name + " just got loaded.", myObjWidget);
-                                    myObjWidget.init();
+                                    myObjWidget.init(myObjWidget.activate.bind(myObjWidget));
                                     that.instance = myObjWidget;
                                     if (callback) callback(that.instance);
                                   }
@@ -305,24 +301,6 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             }();
             this.svg2gcodeObj.init();
             //End SVG2Gcode
-            
-            chilipeppr.load(
-              "#com-chilipeppr-ws-svg2gcode",
-              "http://raw.githubusercontent.com/chilipeppr/widget-svg2gcode/master/auto-generated-widget.html",
-              function() {
-                // Callback after widget loaded into #myDivComZipwhipWidgetSvg2gcode
-                // Now use require.js to get reference to instantiated widget
-                cprequire(
-                  ["inline:com-zipwhip-widget-svg2gcode"], // the id you gave your widget
-                  function(myObjComZipwhipWidgetSvg2gcode) {
-                    // Callback that is passed reference to the newly loaded widget
-                    console.log("Widget / svg2gcode just got loaded.", myObjComZipwhipWidgetSvg2gcode);
-                    myObjComZipwhipWidgetSvg2gcode.init();
-                  }
-                );
-              }
-            );
-
             
             // Inject the Font2Gcode widget
             /*
