@@ -276,7 +276,9 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                                   function(myObjWidget) {
                                     // Callback that is passed reference to the newly loaded widget
                                     console.log(that.name + " just got loaded.", myObjWidget);
-                                    myObjWidget.init(myObjWidget.activate.bind(myObjWidget));
+                                    //myObjWidget.init(myObjWidget.activate.bind(myObjWidget));
+                                    myObjWidget.init();
+                                    myObjWidget.activate();
                                     that.instance = myObjWidget;
                                     if (callback) callback(that.instance);
                                   }
