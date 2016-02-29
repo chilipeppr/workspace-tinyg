@@ -451,7 +451,36 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     instance: null,
                     init: function() {
                         this.btn.click(this.toggle.bind(this));
+                        
+                        // do NOT dynamically load this one since it registers for drag/drop events for .svg files
+                        this.load();
+                        
+                        // we need to subscribe to the /didDrop signal of this widget so we know to show it
+                        chilipeppr.subscribe("/" + this.id + "/didDrop", this, this.show);
                         console.log("done instantiating " + this.name + " add-on widget");
+                    },
+                    load: function(callback) {
+                        var that = this;
+                        chilipeppr.load(
+                          this.div.prop("id"),
+                          this.url,
+                          function() {
+                            // Callback after widget loaded into #myDivWidgetRecvtext
+                            // Now use require.js to get reference to instantiated widget
+                            cprequire(
+                              ["inline:" + that.id], // the id you gave your widget
+                              function(myObjWidget) {
+                                // Callback that is passed reference to the newly loaded widget
+                                console.log(that.name + " just got loaded.", myObjWidget);
+                                //myObjWidget.init(myObjWidget.activate.bind(myObjWidget));
+                                myObjWidget.init();
+                                //myObjWidget.activate();
+                                that.instance = myObjWidget;
+                                if (callback) callback(that.instance);
+                              }
+                            );
+                          }
+                        );
                     },
                     toggle: function() {
                         if (this.div.hasClass("hidden")) {
@@ -462,7 +491,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                             this.hide();
                         }
                     },
-                    show: function(callback) {
+                    show: function() {
                         this.div.removeClass("hidden");
                         this.btn.addClass("active");
     
@@ -473,32 +502,12 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         if (this.instance != null) {
                             console.log("activating " + this.name + " instead of re-instantiating cuz already created");
                             this.instance.activate();
-                            if (callback) callback(this.instance);
+                            //if (callback) callback(this.instance);
                         }
                         else {
                             // otherwise, dynamic load
                             console.log(this.name + " appears to not be instantiated, let us load it from scratch")
-                            var that = this;
-                            chilipeppr.load(
-                              this.div.prop("id"),
-                              this.url,
-                              function() {
-                                // Callback after widget loaded into #myDivWidgetRecvtext
-                                // Now use require.js to get reference to instantiated widget
-                                cprequire(
-                                  ["inline:" + that.id], // the id you gave your widget
-                                  function(myObjWidget) {
-                                    // Callback that is passed reference to the newly loaded widget
-                                    console.log(that.name + " just got loaded.", myObjWidget);
-                                    //myObjWidget.init(myObjWidget.activate.bind(myObjWidget));
-                                    myObjWidget.init();
-                                    myObjWidget.activate();
-                                    that.instance = myObjWidget;
-                                    if (callback) callback(that.instance);
-                                  }
-                                );
-                              }
-                            );
+                            
                         }
                         $(window).trigger('resize');
                     },
