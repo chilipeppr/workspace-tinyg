@@ -1,4 +1,4 @@
-# com-chilipeppr-workspace-tinyg
+# com-chilipeppr-workspace-pyroavr-tinyg
 This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG.
 
 ![alt text](screenshot.png "Screenshot")
@@ -11,13 +11,13 @@ not conflict with other ChiliPeppr objects.
 
 | Item                  | Value           |
 | -------------         | ------------- | 
-| ID                    | com-chilipeppr-workspace-tinyg |
+| ID                    | com-chilipeppr-workspace-pyroavr-tinyg |
 | Name                  | Workspace / TinyG |
 | Description           | This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG. |
-| chilipeppr.load() URL | http://raw.githubusercontent.com/chilipeppr/workspace-tinyg/master/auto-generated-workspace.html |
-| Edit URL              | http://ide.c9.io/chilipeppr/workspace-tinyg |
-| Github URL            | http://github.com/chilipeppr/workspace-tinyg |
-| Test URL              | https://preview.c9users.io/chilipeppr/workspace-tinyg/workspace.html |
+| chilipeppr.load() URL | http://raw.githubusercontent.com/PyroAVR/pyroavr-tinyg/master/auto-generated-workspace.html |
+| Edit URL              | http://ide.c9.io/pyroavr/pyroavr-tinyg |
+| Github URL            | http://github.com/PyroAVR/pyroavr-tinyg |
+| Test URL              | https://preview.c9users.io/pyroavr/pyroavr-tinyg/workspace.html |
 
 ## Example Code for chilipeppr.load() Statement
 
@@ -34,16 +34,16 @@ back the instance of it to init() it.
 // this workspace should be loaded into.
 chilipeppr.load(
   "#pnlWorkspace",
-  "http://raw.githubusercontent.com/chilipeppr/workspace-tinyg/master/auto-generated-workspace.html",
+  "http://raw.githubusercontent.com/PyroAVR/pyroavr-tinyg/master/auto-generated-workspace.html",
   function() {
     // Callback after workspace loaded into #pnlWorkspace
     // Now use require.js to get reference to instantiated workspace
     cprequire(
-      ["inline:com-chilipeppr-workspace-tinyg"], // the id you gave your workspace
-      function(myWorkspaceTinyg) {
+      ["inline:com-chilipeppr-workspace-pyroavr-tinyg"], // the id you gave your workspace
+      function(myWorkspacePyroavrTinyg) {
         // Callback that is passed reference to the newly loaded workspace
-        console.log("Workspace / TinyG just got loaded.", myWorkspaceTinyg);
-        myWorkspaceTinyg.init();
+        console.log("Workspace / TinyG just got loaded.", myWorkspacePyroavrTinyg);
+        myWorkspacePyroavrTinyg.init();
       }
     );
   }
@@ -118,7 +118,7 @@ To better understand how ChiliPeppr's publish() method works see amplify.js's do
           </tr>
       </thead>
       <tbody>
-      <tr valign="top"><td>/com-chilipeppr-workspace-tinyg/com-chilipeppr-elem-dragdrop/ondragover</td><td>The Chilipeppr drag drop element will publish on channel /com-chilipeppr-elem-dragdrop/ondropped when a file is dropped so we subscribe to it so we can load a Gcode file when the user drags it onto the browser. It also adds a hover class to the bound DOM elem so we can add a CSS to hilite on hover</td></tr><tr valign="top"><td>/com-chilipeppr-workspace-tinyg/com-chilipeppr-elem-dragdrop/ondragleave</td><td>We need to know when the drag is over to remove the CSS hilites.</td></tr><tr valign="top"><td>/com-chilipeppr-workspace-tinyg/com-chilipeppr-widget-gcode/resize</td><td>We watch if the Gcode viewer resizes so that we can reposition or resize other elements in the workspace. Specifically we ask the Serial Port Console to resize. We also redraw the 3D Viewer so it fills the whole screen.</td></tr>    
+      <tr valign="top"><td>/com-chilipeppr-workspace-pyroavr-tinyg/com-chilipeppr-elem-dragdrop/ondragover</td><td>The Chilipeppr drag drop element will publish on channel /com-chilipeppr-elem-dragdrop/ondropped when a file is dropped so we subscribe to it so we can load a Gcode file when the user drags it onto the browser. It also adds a hover class to the bound DOM elem so we can add a CSS to hilite on hover</td></tr><tr valign="top"><td>/com-chilipeppr-workspace-pyroavr-tinyg/com-chilipeppr-elem-dragdrop/ondragleave</td><td>We need to know when the drag is over to remove the CSS hilites.</td></tr><tr valign="top"><td>/com-chilipeppr-workspace-pyroavr-tinyg/com-chilipeppr-widget-gcode/resize</td><td>We watch if the Gcode viewer resizes so that we can reposition or resize other elements in the workspace. Specifically we ask the Serial Port Console to resize. We also redraw the 3D Viewer so it fills the whole screen.</td></tr>    
       </tbody>
   </table>
 
@@ -135,7 +135,7 @@ The table below shows, in order, the methods and properties inside the workspace
           </tr>
       </thead>
       <tbody>
-      <tr valign="top"><td>id</td><td>string</td><td>"com-chilipeppr-workspace-tinyg"<br><br>The ID of the widget. You must define this and make it unique.</td></tr><tr valign="top"><td>name</td><td>string</td><td>"Workspace / TinyG"</td></tr><tr valign="top"><td>desc</td><td>string</td><td>"This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG."</td></tr><tr valign="top"><td>url</td><td>string</td><td>"http://raw.githubusercontent.com/chilipeppr/workspace-tinyg/master/auto-generated-workspace.html"</td></tr><tr valign="top"><td>fiddleurl</td><td>string</td><td>"http://ide.c9.io/chilipeppr/workspace-tinyg"</td></tr><tr valign="top"><td>githuburl</td><td>string</td><td>"http://github.com/chilipeppr/workspace-tinyg"</td></tr><tr valign="top"><td>testurl</td><td>string</td><td>"http://workspace-tinyg-chilipeppr.c9users.io/workspace.html"</td></tr><tr valign="top"><td>foreignSubscribe</td><td>object</td><td>Please see docs above.</td></tr><tr valign="top"><td>foreignPublish</td><td>object</td><td>Please see docs above.</td></tr><tr valign="top"><td>widgetConsole</td><td>object</td><td>Contains reference to the Console widget object. Hang onto the reference
+      <tr valign="top"><td>id</td><td>string</td><td>"com-chilipeppr-workspace-pyroavr-tinyg"<br><br>The ID of the widget. You must define this and make it unique.</td></tr><tr valign="top"><td>name</td><td>string</td><td>"Workspace / TinyG"</td></tr><tr valign="top"><td>desc</td><td>string</td><td>"This is a workspace for ChiliPeppr's Hardware Fiddle. It is geared towards CNC machines using TinyG."</td></tr><tr valign="top"><td>url</td><td>string</td><td>"http://raw.githubusercontent.com/PyroAVR/pyroavr-tinyg/master/auto-generated-workspace.html"</td></tr><tr valign="top"><td>fiddleurl</td><td>string</td><td>"http://ide.c9.io/pyroavr/pyroavr-tinyg"</td></tr><tr valign="top"><td>githuburl</td><td>string</td><td>"http://github.com/PyroAVR/pyroavr-tinyg"</td></tr><tr valign="top"><td>testurl</td><td>string</td><td>"http://pyroavr-tinyg-pyroavr.c9users.io/workspace.html"</td></tr><tr valign="top"><td>foreignSubscribe</td><td>object</td><td>Please see docs above.</td></tr><tr valign="top"><td>foreignPublish</td><td>object</td><td>Please see docs above.</td></tr><tr valign="top"><td>widgetConsole</td><td>object</td><td>Contains reference to the Console widget object. Hang onto the reference
 so we can resize it when the window resizes because we want it to manually
 resize to fill the height of the browser so it looks clean.</td></tr><tr valign="top"><td>widgetSpjs</td><td>object</td><td>Contains reference to the Serial Port JSON Server object.</td></tr><tr valign="top"><td>init</td><td>function</td><td>function () <br><br>The workspace's init method. It loads the all the widgets contained in the workspace
 and inits them.</td></tr><tr valign="top"><td>getBillboard</td><td>function</td><td>function () <br><br>Returns the billboard HTML, CSS, and Javascript for this Workspace. The billboard
