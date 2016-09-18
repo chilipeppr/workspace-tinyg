@@ -995,6 +995,74 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             this.touchPlateObj.init();
             //End Touch Plate
 
+            // Super Touch Plate
+            // http://raw.githubusercontent.com/PyroAVR/widget-super-touchplate/master/auto-generated-widget.html
+            // Dynamically load, i.e. wait til user clicks on the button first time.
+            this.superTouchPlateObj = function() {
+                return {
+                superTouchPlateBtn: null,
+                superTouchPlateDiv: null,
+                superTouchPlateInstance: null,
+                init: function() {
+                    this.superTouchPlateBtn = $('#com-chilipeppr-ws-menu .superTouchplate-button');
+                    this.superTouchPlateDiv = $('#com-chilipeppr-ws-superTouchplate');
+                    this.setupBtn();
+                    console.log("done instantiating superTouchPlate add-on widget");
+                },
+                setupBtn: function() {
+                    this.superTouchPlateBtn.click(this.togglesuperTouchPlate.bind(this));
+                },
+                togglesuperTouchPlate: function() {
+                    if (this.superTouchPlateDiv.hasClass("hidden")) {
+                        // unhide
+                        this.showsuperTouchPlate();
+                    }
+                    else {
+                        this.hidesuperTouchPlate();
+                    }
+                },
+                showsuperTouchPlate: function(callback) {
+                    this.superTouchPlateDiv.removeClass("hidden");
+                    this.superTouchPlateBtn.addClass("active");
+
+                    // see if instantiated already
+                    // if so, just activate
+                    if (this.superTouchPlateInstance != null) {
+                        this.superTouchPlateInstance.activateWidget();
+                        if (callback) callback();
+                    }
+                    else {
+                        // otherwise, dynamic load
+                        var that = this;
+                        chilipeppr.load(
+                            "#com-chilipeppr-ws-superTouchplate",
+                            "http://raw.githubusercontent.com/PyroAVR/widget-super-touchplate/master/auto-generated-widget.html",
+                            function() {
+                                require(["inline:com-chilipeppr-widget-super-touchplate"], function(superTouchPlate) {
+                                    that.superTouchPlateInstance = superTouchPlate;
+                                    console.log("superTouchPlate instantiated. superTouchPlateInstance:", that.superTouchPlateInstance);
+                                    that.superTouchPlateInstance.init();
+                                    //eagleInstance.activateWidget();
+                                    if (callback) callback();
+                                });
+                            }
+                        );
+                    }
+                    $(window).trigger('resize');
+                },
+                hidesuperTouchPlate: function() {
+                    this.superTouchPlateDiv.addClass("hidden");
+                    this.superTouchPlateBtn.removeClass("active");
+                    if (this.superTouchPlateInstance != null) {
+                        this.superTouchPlateInstance.unactivateWidget();
+                    }
+                    $(window).trigger('resize');
+                },
+                }
+            }();
+            this.superTouchPlateObj.init();
+            //End Super Touch Plate
+            
             // Arduino / Atmel Firmware Programmer
             // FIDDLE http://jsfiddle.net/chilipeppr/qcduvhkh/11/
             chilipeppr.load(
