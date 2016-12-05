@@ -1276,6 +1276,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
             /* For testing. Load RPM Sensor */
             // com-chilipeppr-ws-rpmsensor
+            
             chilipeppr.load(
               "#com-chilipeppr-ws-rpmsensor",
               "http://raw.githubusercontent.com/chilipeppr/widget-rpmsensor/master/auto-generated-widget.html",
@@ -1292,6 +1293,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 );
               }
             );
+            
 
         },
         //end loadWidgets
