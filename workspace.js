@@ -1036,7 +1036,8 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                         var that = this;
                         chilipeppr.load(
                             "#com-chilipeppr-ws-superTouchplate",
-                            "http://raw.githubusercontent.com/PyroAVR/widget-super-touchplate/master/auto-generated-widget.html",
+                            // "http://raw.githubusercontent.com/PyroAVR/widget-super-touchplate/master/auto-generated-widget.html",
+                            "http://raw.githubusercontent.com/PyroAVR/widget-super-touchplate/tabs/auto-generated-widget.html",
                             function() {
                                 require(["inline:com-chilipeppr-widget-super-touchplate"], function(superTouchPlate) {
                                     that.superTouchPlateInstance = superTouchPlate;
@@ -1272,6 +1273,25 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 });
             }); //End WebRTC Client
             */
+
+            /* For testing. Load RPM Sensor */
+            // com-chilipeppr-ws-rpmsensor
+            chilipeppr.load(
+              "#com-chilipeppr-ws-rpmsensor",
+              "http://raw.githubusercontent.com/chilipeppr/widget-rpmsensor/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidgetRpmsensor
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-rpmsensor"], // the id you gave your widget
+                  function(myObjWidgetRpmsensor) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / Template just got loaded.", myObjWidgetRpmsensor);
+                    myObjWidgetRpmsensor.init();
+                  }
+                );
+              }
+            );
 
         },
         //end loadWidgets
