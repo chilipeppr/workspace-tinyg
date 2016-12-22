@@ -1,14 +1,22 @@
+.workspace-dropdown li {
+    padding: 6px 20px;
+}
+.btn-ws {
+    width:100%;
+    /*margin:6px 20px;*/
+}
 .zipwhip-button {
-    line-height:0px;
-    padding: 1px 2px;
+    /*line-height:0px;*/
+    /*padding: 1px 2px;*/
 }
 .zipwhip-recvtext-button {
-    height:22px;
+    /*height:22px;*/
 }
 .zipwhip {
     background: url('http://www.zipwhip.com/resources/images/favicon.ico') no-repeat top left;
     display: inline-block;
-    margin: 1px 0;
+    /*margin: 1px 0;*/
+    margin: -4px 5px;
     height: 16px;
     width: 16px;
     /* line-height:0px; */
@@ -28,9 +36,10 @@
     /* padding: 10px 15px; */
 }
 #com-chilipeppr-ws-gcode-dragdrop {
-    margin-right:6px;
+    /*margin-right:6px;*/
 }
 #com-chilipeppr-ws-gcode-hdr {
+    height:64px;
     margin-bottom:10px;
 }
 .panel {
