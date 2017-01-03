@@ -1284,6 +1284,9 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                             div.addClass("hidden");
                             btn.removeClass("active");
                         }
+                        setTimeout(function() {
+                            $(window).trigger('resize');
+                        }, 200);
                     });
                     
                   }
