@@ -1272,8 +1272,13 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     console.log("Widget / Cayenn just got loaded.", myObjWidgetCayenn);
                     myObjWidgetCayenn.init();
                     
+                    // this widget has a lot of modals that pop up whenever, so we need to make sure the parent div is
+                    // not hidden. instead we'll hide the exact widget because the modals are outside the div of the widget
+                    $('#com-chilipeppr-ws-cayenn').removeClass("hidden");
+                    
                     var btn = $('#com-chilipeppr-ws-menu .cayenn-button');
-                    var div = $('#com-chilipeppr-ws-cayenn');
+                    var div = $('#com-chilipeppr-widget-cayenn');
+                    div.addClass("hidden");
                     btn.click(function() {
                         if (div.hasClass("hidden")) {
                             // show widget
