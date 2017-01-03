@@ -1258,6 +1258,39 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 }
             ); //End TinyG
 
+            // Cayenn Widget
+            chilipeppr.load(
+              "#com-chilipeppr-ws-cayenn",
+              "http://raw.githubusercontent.com/chilipeppr/widget-cayenn/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidgetCayenn
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-cayenn"], // the id you gave your widget
+                  function(myObjWidgetCayenn) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / Cayenn just got loaded.", myObjWidgetCayenn);
+                    myObjWidgetCayenn.init();
+                    
+                    var btn = $('#com-chilipeppr-ws-menu .cayenn-button');
+                    var div = $('#com-chilipeppr-ws-cayenn');
+                    btn.click(function() {
+                        if (div.hasClass("hidden")) {
+                            // show widget
+                            div.removeClass("hidden");
+                            btn.addClass("active");
+                        } else {
+                            // hide widget
+                            div.addClass("hidden");
+                            btn.removeClass("active");
+                        }
+                    });
+                    
+                  }
+                );
+              }
+            );
+
             // WebRTC Client com-chilipeppr-webrtcclient
             /*
             chilipeppr.load(
