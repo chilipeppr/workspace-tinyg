@@ -1333,6 +1333,42 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 );
               }
             );
+            
+            // Frank Herrmann's Webcam Widget
+            chilipeppr.load(
+              "#com-chilipeppr-ws-webcam",
+              "http://raw.githubusercontent.com/xpix/widget-cam/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidgetCam
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-cam"], // the id you gave your widget
+                  function(myObjWidgetCam) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / Cam just got loaded.", myObjWidgetCam);
+                    myObjWidgetCam.init();
+                    
+                    var btn = $('#com-chilipeppr-ws-menu .webcam-button');
+                    var div = $('#com-chilipeppr-ws-webcam');
+                    div.addClass("hidden");
+                    btn.click(function() {
+                        if (div.hasClass("hidden")) {
+                            // show widget
+                            div.removeClass("hidden");
+                            btn.addClass("active");
+                        } else {
+                            // hide widget
+                            div.addClass("hidden");
+                            btn.removeClass("active");
+                        }
+                        setTimeout(function() {
+                            $(window).trigger('resize');
+                        }, 200);
+                    });
+                  }
+                );
+              }
+            );
 
             // WebRTC Client com-chilipeppr-webrtcclient
             /*

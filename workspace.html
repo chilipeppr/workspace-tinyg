@@ -84,6 +84,7 @@
                                     <!--<li><a href="#">Separated link</a></li>-->
                                     
                                     <li><button type="button" class="btn-ws btn btn-xs btn-default xbox-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Use your Xbox Controller with ChiliPeppr." data-trigger="hover" data-delay="100"><span class=""></span>Xbox Controller</button></li>
+                                    <li><button type="button" class="btn-ws btn btn-xs btn-default webcam-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Stream your MJPEG webcam" data-trigger="hover" data-delay="100"><span class=""></span>Webcam</button></li>
                                     <li><button type="button" class="btn-ws btn btn-xs btn-default zipwhip-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Get a text sent to you when your CNC job is completed." data-trigger="hover" data-delay="100"><span class="zipwhip"></span>Send Text on Job Done</button></li>
                                     <li><button type="button" class="btn-ws btn btn-xs btn-default zipwhip-recvtext-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Login to Zipwhip to receive texts and start a CNC job when the text is received." data-trigger="hover" data-delay="100"><span class="zipwhip"></span>Recv Text to Trigger</button></li>
                                     <li><button type="button" class="btn-ws btn btn-xs btn-default autolevel-button" data-container="body" data-toggle="popover" data-placement="auto" data-content="Allows you to auto-level your PCB before milling. Most raw PCB boards have a slight warpage. This widget lets you probe the warpage and then it auto-scales your Gcode to match the warpage so you get very clean/predictable z-positions in your milling job."
@@ -185,6 +186,8 @@
                         <div id="com-chilipeppr-xyz" class="">Load XYZ Here</div>
                         <!-- Tinyg -->
                         <div id="com-chilipeppr-tinyg" class="">Load TinyG Here</div>
+                        <!-- Xbox -->
+                        <div class="hidden" id="com-chilipeppr-ws-webcam"></div>
                         <!-- WebRTC Client -->
                         <div id="com-chilipeppr-webrtcclient" class="hidden">Load WebRTC Client Here</div>
                         <!-- Serial Port Selector -->
