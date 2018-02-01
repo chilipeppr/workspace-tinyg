@@ -1350,7 +1350,7 @@ var getGithubUrl = function(callback) {
   var stdout = childproc.execSync(cmd, { encoding: 'utf8' });
   //console.log("Got the following Github URL:", stdout);
 
-  var re = /.*github.com:/i;
+  var re = /.*github.com/i;
   var url = stdout.replace(re, "");
   url = url.replace(/.git[\s\S]*$/i, ""); // remove end
   
