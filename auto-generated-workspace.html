@@ -654,7 +654,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     }
                 };
             }();
-            this.svg2gcodeObj.init();
+            // this.svg2gcodeObj.init();
             //End SVG2Gcode
             
             // Inject the Font2Gcode widget
@@ -790,32 +790,32 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             
             // Auto-Leveller
             // com-chilipeppr-ws-autolevel
-            chilipeppr.load(
-                "#com-chilipeppr-ws-autolevel",
-                "http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html",
-                function() {
-                    require(["inline:com-chilipeppr-widget-autolevel"], function(autolevel) {
-                        autolevel.init();
-                        // setup toggle button
-                        var alBtn = $('#com-chilipeppr-ws-menu .autolevel-button');
-                        var alDiv = $('#com-chilipeppr-ws-autolevel');
-                        alBtn.click(function() {
-                            if (alDiv.hasClass("hidden")) {
-                                // unhide
-                                alDiv.removeClass("hidden");
-                                alBtn.addClass("active");
-                                autolevel.onDisplay();
-                            }
-                            else {
-                                alDiv.addClass("hidden");
-                                alBtn.removeClass("active");
-                                autolevel.onUndisplay();
-                            }
-                            $(window).trigger('resize');
+            // chilipeppr.load(
+            //     "#com-chilipeppr-ws-autolevel",
+            //     "http://raw.githubusercontent.com/chilipeppr/widget-autolevel/master/auto-generated-widget.html",
+            //     function() {
+            //         require(["inline:com-chilipeppr-widget-autolevel"], function(autolevel) {
+            //             autolevel.init();
+            //             // setup toggle button
+            //             var alBtn = $('#com-chilipeppr-ws-menu .autolevel-button');
+            //             var alDiv = $('#com-chilipeppr-ws-autolevel');
+            //             alBtn.click(function() {
+            //                 if (alDiv.hasClass("hidden")) {
+            //                     // unhide
+            //                     alDiv.removeClass("hidden");
+            //                     alBtn.addClass("active");
+            //                     autolevel.onDisplay();
+            //                 }
+            //                 else {
+            //                     alDiv.addClass("hidden");
+            //                     alBtn.removeClass("active");
+            //                     autolevel.onUndisplay();
+            //                 }
+            //                 $(window).trigger('resize');
 
-                        });
-                    });
-                }); //End Auto-Leveller
+            //             });
+            //         });
+            //     }); //End Auto-Leveller
 
 
             // Macro
@@ -850,30 +850,30 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
             // JScut
             // com-chilipeppr-ws-jscut
-            chilipeppr.load(
-                "#com-chilipeppr-ws-jscut",
-                "http://raw.githubusercontent.com/chilipeppr/widget-jscut/master/auto-generated-widget.html",
-                function() {
-                    require(["inline:org-jscut-gcode-widget"], function(jscut) {
-                        jscut.init();
-                        // setup toggle button
-                        var alBtn = $('#com-chilipeppr-ws-menu .jscut-button');
-                        var alDiv = $('#com-chilipeppr-ws-jscut');
-                        alBtn.click(function() {
-                            if (alDiv.hasClass("hidden")) {
-                                // unhide
-                                alDiv.removeClass("hidden");
-                                alBtn.addClass("active");
-                            }
-                            else {
-                                alDiv.addClass("hidden");
-                                alBtn.removeClass("active");
-                            }
-                            $(window).trigger('resize');
+            // chilipeppr.load(
+            //     "#com-chilipeppr-ws-jscut",
+            //     "http://raw.githubusercontent.com/chilipeppr/widget-jscut/master/auto-generated-widget.html",
+            //     function() {
+            //         require(["inline:org-jscut-gcode-widget"], function(jscut) {
+            //             jscut.init();
+            //             // setup toggle button
+            //             var alBtn = $('#com-chilipeppr-ws-menu .jscut-button');
+            //             var alDiv = $('#com-chilipeppr-ws-jscut');
+            //             alBtn.click(function() {
+            //                 if (alDiv.hasClass("hidden")) {
+            //                     // unhide
+            //                     alDiv.removeClass("hidden");
+            //                     alBtn.addClass("active");
+            //                 }
+            //                 else {
+            //                     alDiv.addClass("hidden");
+            //                     alBtn.removeClass("active");
+            //                 }
+            //                 $(window).trigger('resize');
 
-                        });
-                    });
-                }); //End JSCut
+            //             });
+            //         });
+            //     }); //End JSCut
                 
             
             // Laser Solder
@@ -1044,7 +1044,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 
             }();
             console.log("eagleObj:", this.eagleObj);
-            this.eagleObj.init();
+            // this.eagleObj.init();
             //End Eagle Brd Import
 
             // GPIO
@@ -1112,7 +1112,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     $(window).trigger('resize');
                 },
             };
-            this.gpioObj.init();
+            // this.gpioObj.init();
             //End GPIO
 
             // SuttleXpress
@@ -1185,7 +1185,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 },
                 }
             }();
-            this.shuttlexpressObj.init();
+            // this.shuttlexpressObj.init();
             //End ShuttleXpress
 
             // Touch Plate
@@ -1253,7 +1253,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 },
                 }
             }();
-            this.touchPlateObj.init();
+            // this.touchPlateObj.init();
             //End Touch Plate
 
             // Super Touch Plate
@@ -1322,7 +1322,7 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                 },
                 }
             }();
-            this.superTouchPlateObj.init();
+            // this.superTouchPlateObj.init();
             //End Super Touch Plate
             
             // Arduino / Atmel Firmware Programmer
