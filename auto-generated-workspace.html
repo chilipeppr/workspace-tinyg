@@ -682,36 +682,36 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
 
             // Zipwhip texting
             // com-chilipeppr-ws-zipwhip
-            /*
-            chilipeppr.load(
-                "#com-chilipeppr-ws-zipwhip",
-                "http://raw.githubusercontent.com/chilipeppr/widget-zipwhip/master/auto-generated-widget.html",
-                function() {
-                    require(["inline:com-chilipeppr-elem-zipwhip"], function(zipwhip) {
-                        zipwhip.init();
-                        // setup toggle button
-                        var zwBtn = $('#com-chilipeppr-ws-menu .zipwhip-button');
-                        var zwDiv = $('#com-chilipeppr-ws-zipwhip');
-                        zwBtn.click(function() {
-                            if (zwDiv.hasClass("hidden")) {
-                                // unhide
-                                zwDiv.removeClass("hidden");
-                                zwBtn.addClass("active");
-                            }
-                            else {
-                                zwDiv.addClass("hidden");
-                                zwBtn.removeClass("active");
-                            }
-                            $(window).trigger('resize');
-                        });
-                    });
-                }); //End Zipwhip texting
-            */
+            
+            // chilipeppr.load(
+            //     "#com-chilipeppr-ws-zipwhip",
+            //     "http://raw.githubusercontent.com/chilipeppr/widget-zipwhip/master/auto-generated-widget.html",
+            //     function() {
+            //         require(["inline:com-chilipeppr-elem-zipwhip"], function(zipwhip) {
+            //             zipwhip.init();
+            //             // setup toggle button
+            //             var zwBtn = $('#com-chilipeppr-ws-menu .zipwhip-button');
+            //             var zwDiv = $('#com-chilipeppr-ws-zipwhip');
+            //             zwBtn.click(function() {
+            //                 if (zwDiv.hasClass("hidden")) {
+            //                     // unhide
+            //                     zwDiv.removeClass("hidden");
+            //                     zwBtn.addClass("active");
+            //                 }
+            //                 else {
+            //                     zwDiv.addClass("hidden");
+            //                     zwBtn.removeClass("active");
+            //                 }
+            //                 $(window).trigger('resize');
+            //             });
+            //         });
+            //     }); //End Zipwhip texting
+            
 
             // Zipwhip Recieve Text widget
             // Dynamically load the Zipwhip Recieve Text widget, i.e. wait til user clicks on the button
             // first time.
-            /*
+            
             wsObj.zipwhipRecvTextObj = {
                 zipwhipRecvTextBtn: null,
                 zipwhipRecvTextDiv: null,
@@ -784,8 +784,8 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
                     $(window).trigger('resize');
                 },
             };
-            wsObj.zipwhipRecvTextObj.init();
-            */
+            // wsObj.zipwhipRecvTextObj.init();
+            
             //End Zipwhip Receive Text
             
             // Auto-Leveller
