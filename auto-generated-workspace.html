@@ -1520,81 +1520,81 @@ cpdefine("inline:com-chilipeppr-workspace-tinyg", ["chilipeppr_ready"], function
             ); //End TinyG
 
             // Cayenn Widget
-            chilipeppr.load(
-              "#com-chilipeppr-ws-cayenn",
-              "http://raw.githubusercontent.com/chilipeppr/widget-cayenn/master/auto-generated-widget.html",
-              function() {
-                // Callback after widget loaded into #myDivWidgetCayenn
-                // Now use require.js to get reference to instantiated widget
-                cprequire(
-                  ["inline:com-chilipeppr-widget-cayenn"], // the id you gave your widget
-                  function(myObjWidgetCayenn) {
-                    // Callback that is passed reference to the newly loaded widget
-                    console.log("Widget / Cayenn just got loaded.", myObjWidgetCayenn);
-                    myObjWidgetCayenn.init();
+            // chilipeppr.load(
+            //   "#com-chilipeppr-ws-cayenn",
+            //   "http://raw.githubusercontent.com/chilipeppr/widget-cayenn/master/auto-generated-widget.html",
+            //   function() {
+            //     // Callback after widget loaded into #myDivWidgetCayenn
+            //     // Now use require.js to get reference to instantiated widget
+            //     cprequire(
+            //       ["inline:com-chilipeppr-widget-cayenn"], // the id you gave your widget
+            //       function(myObjWidgetCayenn) {
+            //         // Callback that is passed reference to the newly loaded widget
+            //         console.log("Widget / Cayenn just got loaded.", myObjWidgetCayenn);
+            //         myObjWidgetCayenn.init();
                     
-                    // this widget has a lot of modals that pop up whenever, so we need to make sure the parent div is
-                    // not hidden. instead we'll hide the exact widget because the modals are outside the div of the widget
-                    $('#com-chilipeppr-ws-cayenn').removeClass("hidden");
+            //         // this widget has a lot of modals that pop up whenever, so we need to make sure the parent div is
+            //         // not hidden. instead we'll hide the exact widget because the modals are outside the div of the widget
+            //         $('#com-chilipeppr-ws-cayenn').removeClass("hidden");
                     
-                    var btn = $('#com-chilipeppr-ws-menu .cayenn-button');
-                    var div = $('#com-chilipeppr-widget-cayenn');
-                    div.addClass("hidden");
-                    btn.click(function() {
-                        if (div.hasClass("hidden")) {
-                            // show widget
-                            div.removeClass("hidden");
-                            btn.addClass("active");
-                        } else {
-                            // hide widget
-                            div.addClass("hidden");
-                            btn.removeClass("active");
-                        }
-                        setTimeout(function() {
-                            $(window).trigger('resize');
-                        }, 200);
-                    });
+            //         var btn = $('#com-chilipeppr-ws-menu .cayenn-button');
+            //         var div = $('#com-chilipeppr-widget-cayenn');
+            //         div.addClass("hidden");
+            //         btn.click(function() {
+            //             if (div.hasClass("hidden")) {
+            //                 // show widget
+            //                 div.removeClass("hidden");
+            //                 btn.addClass("active");
+            //             } else {
+            //                 // hide widget
+            //                 div.addClass("hidden");
+            //                 btn.removeClass("active");
+            //             }
+            //             setTimeout(function() {
+            //                 $(window).trigger('resize');
+            //             }, 200);
+            //         });
                     
-                  }
-                );
-              }
-            );
+            //       }
+            //     );
+            //   }
+            // );
             
             // Frank Herrmann's Webcam Widget
-            chilipeppr.load(
-              "#com-chilipeppr-ws-webcam",
-              "http://raw.githubusercontent.com/xpix/widget-cam/master/auto-generated-widget.html",
-              function() {
-                // Callback after widget loaded into #myDivWidgetCam
-                // Now use require.js to get reference to instantiated widget
-                cprequire(
-                  ["inline:com-chilipeppr-widget-cam"], // the id you gave your widget
-                  function(myObjWidgetCam) {
-                    // Callback that is passed reference to the newly loaded widget
-                    console.log("Widget / Cam just got loaded.", myObjWidgetCam);
-                    myObjWidgetCam.init();
+            // chilipeppr.load(
+            //   "#com-chilipeppr-ws-webcam",
+            //   "http://raw.githubusercontent.com/xpix/widget-cam/master/auto-generated-widget.html",
+            //   function() {
+            //     // Callback after widget loaded into #myDivWidgetCam
+            //     // Now use require.js to get reference to instantiated widget
+            //     cprequire(
+            //       ["inline:com-chilipeppr-widget-cam"], // the id you gave your widget
+            //       function(myObjWidgetCam) {
+            //         // Callback that is passed reference to the newly loaded widget
+            //         console.log("Widget / Cam just got loaded.", myObjWidgetCam);
+            //         myObjWidgetCam.init();
                     
-                    var btn = $('#com-chilipeppr-ws-menu .webcam-button');
-                    var div = $('#com-chilipeppr-ws-webcam');
-                    div.addClass("hidden");
-                    btn.click(function() {
-                        if (div.hasClass("hidden")) {
-                            // show widget
-                            div.removeClass("hidden");
-                            btn.addClass("active");
-                        } else {
-                            // hide widget
-                            div.addClass("hidden");
-                            btn.removeClass("active");
-                        }
-                        setTimeout(function() {
-                            $(window).trigger('resize');
-                        }, 200);
-                    });
-                  }
-                );
-              }
-            );
+            //         var btn = $('#com-chilipeppr-ws-menu .webcam-button');
+            //         var div = $('#com-chilipeppr-ws-webcam');
+            //         div.addClass("hidden");
+            //         btn.click(function() {
+            //             if (div.hasClass("hidden")) {
+            //                 // show widget
+            //                 div.removeClass("hidden");
+            //                 btn.addClass("active");
+            //             } else {
+            //                 // hide widget
+            //                 div.addClass("hidden");
+            //                 btn.removeClass("active");
+            //             }
+            //             setTimeout(function() {
+            //                 $(window).trigger('resize');
+            //             }, 200);
+            //         });
+            //       }
+            //     );
+            //   }
+            // );
 
             // WebRTC Client com-chilipeppr-webrtcclient
             /*
